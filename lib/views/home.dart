@@ -12,17 +12,31 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  LocationData? _currentLocation;
+  // LocationData? _currentLocation;
   final location = Location();
+  LocationData? _startPoint = null;
+  LocationData? _lastPoint = null;
 
   void _requestLocationPermission() async {
     await RequestLocationPermission.request(location);
   }
 
-  void _getLocation() {
+  // void _getLocation() {
+  //   GetLocation.getPosition(
+  //     location,
+  //   ).then((value) => setState(() => _currentLocation = value));
+  // }
+
+  void _startLocation() {
     GetLocation.getPosition(
       location,
-    ).then((value) => setState(() => _currentLocation = value));
+    ).then((value) => setState(() => _startPoint = value));
+  }
+
+  void _lastLocation() {
+    GetLocation.getPosition(
+      location,
+    ).then((value) => setState(() => _lastPoint = value));
   }
 
   @override
@@ -40,13 +54,13 @@ class _HomeViewState extends State<HomeView> {
             Padding(
               padding: const EdgeInsets.all(10),
               child: Text(
-                '$_currentLocation',
+                '始点の座標：$_startPoint' + '終点の座標：$_lastPoint',
                 style: Theme.of(context).textTheme.bodyLarge,
               ),
             ),
-            ButtonBar(
-              alignment: MainAxisAlignment.center,
-              buttonPadding: const EdgeInsets.all(10),
+            Column(
+              // alignment: MainAxisAlignment.center,
+              // buttonPadding: const EdgeInsets.all(10),
               children: [
                 SizedBox(
                   height: 50,
@@ -60,8 +74,16 @@ class _HomeViewState extends State<HomeView> {
                   height: 50,
                   width: 105,
                   child: ElevatedButton(
-                    onPressed: _getLocation,
-                    child: const Text('get'),
+                    onPressed: _startLocation,
+                    child: const Text('開始'),
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                  width: 105,
+                  child: ElevatedButton(
+                    onPressed: _lastLocation,
+                    child: const Text('終了'),
                   ),
                 ),
               ],

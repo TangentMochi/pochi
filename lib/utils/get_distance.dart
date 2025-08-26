@@ -1,5 +1,5 @@
 import 'package:geolocator/geolocator.dart';
-import 'package:location/location.dart' as prefix;
+//import 'package:location/location.dart' as prefix;
 
 class GetDistance {
   Future<void> getLocation() async {

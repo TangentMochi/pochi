@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const String title = 'Flutter location Demo';
+    const String title = 'Pochi';
 
     return MaterialApp(
       title: title,
