@@ -1,3 +1,20 @@
+import java.util.*
+
+// Gradleビルドスクリプト内でDartの環境変数を使用できるようにするための初期設定
+val dartEnvironmentVariables = mutableMapOf<String, String>()
+if (project.hasProperty("dart-defines")) {
+    // カンマ区切りかつBase64でエンコードされているdart-definesの値をデコードして変数に格納する。
+    (project.property("dart-defines") as String)
+        .split(',')
+        .map { entry ->
+            val decoded = String(Base64.getDecoder().decode(entry), Charsets.UTF_8)
+            val pair = decoded.split('=', limit = 2)
+            if (pair.size == 2) {
+                dartEnvironmentVariables[pair[0]] = pair[1]
+            }
+        }
+}
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -28,6 +45,7 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+        resValue("string", "google_map_api_key", "${dartEnvironmentVariables.androidGoogleMapApiKey}")
     }
 
     buildTypes {
