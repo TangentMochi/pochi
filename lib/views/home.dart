@@ -8,14 +8,15 @@ class HomeView extends StatefulWidget {
   final String title;
 
   @override
-  State<HomeView> createState() => _HomeViewState();
+  State<HomeView> createState() => HomeViewState();
 }
 
-class _HomeViewState extends State<HomeView> {
+class HomeViewState extends State<HomeView> {
   // LocationData? _currentLocation;
   final location = Location();
-  LocationData? _startPoint = null;
-  LocationData? _lastPoint = null;
+  LocationData? startPoint = null;
+  LocationData? lastPoint = null;
+  double? distance = null;
 
   void _requestLocationPermission() async {
     await RequestLocationPermission.request(location);
@@ -30,13 +31,16 @@ class _HomeViewState extends State<HomeView> {
   void _startLocation() {
     GetLocation.getPosition(
       location,
-    ).then((value) => setState(() => _startPoint = value));
+    ).then((value) => setState(() => startPoint = value));
   }
 
   void _lastLocation() {
     GetLocation.getPosition(
       location,
-    ).then((value) => setState(() => _lastPoint = value));
+    ).then((value) => setState(() => lastPoint = value));
+    setState(() async {
+      distance = await getDistance();
+    });
   }
 
   @override
@@ -53,9 +57,14 @@ class _HomeViewState extends State<HomeView> {
           children: <Widget>[
             Padding(
               padding: const EdgeInsets.all(10),
-              child: Text(
-                '始点の座標：$_startPoint' + '終点の座標：$_lastPoint',
-                style: Theme.of(context).textTheme.bodyLarge,
+              child: Column(
+                children: [
+                  Text(
+                    '始点の座標：$startPoint' + '終点の座標：$lastPoint',
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                  Text('始点と終点の距離：$distance'),
+                ],
               ),
             ),
             Column(
