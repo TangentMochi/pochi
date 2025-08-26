@@ -71,6 +71,15 @@ class HomeViewState extends State<HomeView> {
     });
   }
 
+  void _reset() {
+    setState(() {
+      startPoint = null;
+      checkPoint = null;
+      distance = 0;
+      sum = 0;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -123,6 +132,14 @@ class HomeViewState extends State<HomeView> {
                   child: ElevatedButton(
                     onPressed: _checkPointLocation,
                     child: const Text('チェックポイント'),
+                  ),
+                ),
+                SizedBox(
+                  height: 50,
+                  width: 105,
+                  child: ElevatedButton(
+                    onPressed: _reset,
+                    child: const Text('リセット'),
                   ),
                 ),
               ],
