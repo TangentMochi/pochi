@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:location/location.dart';
 import 'package:pochi/import.dart';
+import 'dart:async';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key, required this.title});
@@ -19,6 +20,7 @@ class HomeViewState extends State<HomeView> {
   LocationData? checkPoint = null;
   double distance = 0;
   double sum = 0;
+  Timer? timer;
 
   void _requestLocationPermission() async {
     await RequestLocationPermission.request(location);
@@ -34,6 +36,14 @@ class HomeViewState extends State<HomeView> {
     var point = await getPosition(location);
     setState(() {
       startPoint = point;
+    });
+    _startMeasurement();
+  }
+
+  @override
+  void _startMeasurement() {
+    Timer.periodic(const Duration(seconds: 5), (timer) {
+      _checkPointLocation();
     });
   }
 
@@ -72,6 +82,7 @@ class HomeViewState extends State<HomeView> {
   }
 
   void _reset() {
+    timer?.cancel();
     setState(() {
       startPoint = null;
       checkPoint = null;
@@ -126,20 +137,20 @@ class HomeViewState extends State<HomeView> {
                     child: const Text('開始'),
                   ),
                 ),
-                SizedBox(
-                  height: 50,
-                  width: 105,
-                  child: ElevatedButton(
-                    onPressed: _checkPointLocation,
-                    child: const Text('チェックポイント'),
-                  ),
-                ),
+                // SizedBox(
+                //   height: 50,
+                //   width: 105,
+                //   child: ElevatedButton(
+                //     onPressed: _checkPointLocation,
+                //     child: const Text('チェックポイント'),
+                //   ),
+                // ),
                 SizedBox(
                   height: 50,
                   width: 105,
                   child: ElevatedButton(
                     onPressed: _reset,
-                    child: const Text('リセット'),
+                    child: const Text('停止'),
                   ),
                 ),
               ],
