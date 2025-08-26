@@ -5,7 +5,10 @@ import 'package:location/location.dart';
 //import 'package:location/location.dart' as prefix;
 import 'package:pochi/views/home.dart';
 
-FutureOr<double?> getDistance() async {
+FutureOr<double?> getDistance(
+  LocationData? startPoint,
+  LocationData? lastPoint,
+) async {
   // // 現在の位置を返す
   // final LocationSettings locationSettings = LocationSettings(
   //   accuracy: LocationAccuracy.best,
@@ -20,26 +23,22 @@ FutureOr<double?> getDistance() async {
 
   // 距離をメートルで返す
 
-  LocationData? startLocationValue = await HomeViewState().startPoint;
-  LocationData? lastLocationValue = await HomeViewState().lastPoint;
+  // LocationData? startLocationValue = await HomeViewState().startPoint;
+  // LocationData? lastLocationValue = await HomeViewState().lastPoint;
 
-  double? distanceInMeters = null;
-
-  if (startLocationValue != null && lastLocationValue != null) {
-    double startLatitude = startLocationValue.latitude!;
-    double startLongitude = startLocationValue.longitude!;
-    double lastLatitude = lastLocationValue.latitude!;
-    double lastLongitude = lastLocationValue.longitude!;
-
-    distanceInMeters = Geolocator.distanceBetween(
-      startLatitude,
-      startLongitude,
-      lastLatitude,
-      lastLongitude,
-    );
-
-    // print("距離: ${distanceInMeters.toStringAsFixed(2)} メートル");
-    // return distanceInMeters;
+  if (startPoint == null || lastPoint == null) {
+    return null;
   }
+  double startLatitude = startPoint.latitude!;
+  double startLongitude = startPoint.longitude!;
+  double lastLatitude = lastPoint.latitude!;
+  double lastLongitude = lastPoint.longitude!;
+
+  double distanceInMeters = Geolocator.distanceBetween(
+    startLatitude,
+    startLongitude,
+    lastLatitude,
+    lastLongitude,
+  );
   return distanceInMeters;
 }

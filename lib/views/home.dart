@@ -39,8 +39,14 @@ class HomeViewState extends State<HomeView> {
       location,
     ).then((value) => setState(() => lastPoint = value));
     setState(() async {
-      distance = await getDistance();
+      _calculateDistance();
     });
+  }
+
+  void _calculateDistance() async {
+    //距離の計算
+    distance = await getDistance(startPoint, lastPoint);
+    setState(() {});
   }
 
   @override
