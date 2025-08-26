@@ -27,7 +27,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>おさんぽには場所が必要です。</string>
+	<string>おさんぽには位置情報の利用が必要です。</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -47,11 +47,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>おさんぽには位置情報の利用が必要です。</string>
-
-	<key>Google Maps API Key</key>
+	<key>Google_Maps_API_Key</key>
 	<string>${iOSGoogleMapsApiKey}</string>
 </dict>
 </plist>

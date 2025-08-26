@@ -1,5 +1,7 @@
 import Flutter
 import UIKit
+import GoogleMaps
+import flutter_config
 
 @main
 @objc class AppDelegate: FlutterAppDelegate {
@@ -9,10 +11,7 @@ import UIKit
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
 
-    if let googleMapsApiKey = Bundle.main.infoDictionary?["Google Maps API Key"] as? String {
-        GMSServices.provideAPIKey(googleMapsApiKey)
-    }
-
+    GMSServices.provideAPIKey(FlutterConfigPlugin.env(for: "iOSGoogleMapApiKey"))
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
 }
