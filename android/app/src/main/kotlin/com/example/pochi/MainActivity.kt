@@ -1,4 +1,4 @@
-package com.example.pochi
+package com.reazon.pochi
 
 import io.flutter.embedding.android.FlutterActivity
 
