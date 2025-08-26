@@ -16,7 +16,7 @@ class HomeViewState extends State<HomeView> {
   final location = Location();
   LocationData? startPoint = null;
   LocationData? lastPoint = null;
-  double? distance = null;
+  double distance = 0;
 
   void _requestLocationPermission() async {
     await RequestLocationPermission.request(location);
@@ -28,25 +28,28 @@ class HomeViewState extends State<HomeView> {
   //   ).then((value) => setState(() => _currentLocation = value));
   // }
 
-  void _startLocation() {
-    GetLocation.getPosition(
-      location,
-    ).then((value) => setState(() => startPoint = value));
+  void _startLocation() async {
+    var point = await getPosition(location);
+    setState(() {
+      startPoint = point;
+    });
   }
 
-  void _lastLocation() {
-    GetLocation.getPosition(
-      location,
-    ).then((value) => setState(() => lastPoint = value));
-    setState(() async {
-      _calculateDistance();
+  void _lastLocation() async {
+    var point = await getPosition(location);
+    setState(() {
+      lastPoint = point;
     });
+    _calculateDistance();
   }
 
   void _calculateDistance() async {
     //距離の計算
-    distance = await getDistance(startPoint, lastPoint);
-    setState(() {});
+    var temp = await getDistance(startPoint, lastPoint);
+    print(temp);
+    setState(() {
+      distance = temp ?? 0;
+    });
   }
 
   @override
@@ -66,7 +69,7 @@ class HomeViewState extends State<HomeView> {
               child: Column(
                 children: [
                   Text(
-                    '始点の座標：$startPoint' + '終点の座標：$lastPoint',
+                    '始点の座標：$startPoint 終点の座標：$lastPoint',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
                   Text('始点と終点の距離：$distance'),
