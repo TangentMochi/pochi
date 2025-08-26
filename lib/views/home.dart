@@ -52,10 +52,10 @@ class HomeViewState extends State<HomeView> {
     setState(() {
       distance = temp ?? 0;
     });
-    _sumDistance(distance);
+    _sumDistance();
   }
 
-  void _sumDistance(distance) async {
+  void _sumDistance() async {
     // 測定した距離をsumに加算
     var temp = await distance;
     setState(() {
@@ -65,10 +65,9 @@ class HomeViewState extends State<HomeView> {
   }
 
   void _locationReset() async {
-    var start = await startPoint;
     var last = await checkPoint;
     setState(() {
-      start = last;
+      startPoint = last;
     });
   }
 
