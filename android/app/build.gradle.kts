@@ -45,7 +45,7 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
-        resValue("string", "google_map_api_key", "${dartEnvironmentVariables.androidGoogleMapApiKey}")
+        resValue("string", "google_map_api_key", "${dartEnvironmentVariables["androidGoogleMapApiKey"]}")
     }
 
     buildTypes {
