@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:geolocator/geolocator.dart';
 import 'package:location/location.dart';
 //import 'package:location/location.dart' as prefix;
-import 'package:pochi/views/home.dart';
+//import 'package:pochi/views/home.dart';
 
 FutureOr<double?> getDistance(
   LocationData? startPoint,
@@ -20,8 +20,6 @@ FutureOr<double?> getDistance(
   // );
   // print("緯度: " + position.latitude.toString());
   // print("経度: " + position.longitude.toString());
-
-  // 距離をメートルで返す
 
   // LocationData? startLocationValue = await HomeViewState().startPoint;
   // LocationData? lastLocationValue = await HomeViewState().lastPoint;
@@ -40,5 +38,5 @@ FutureOr<double?> getDistance(
     lastLatitude,
     lastLongitude,
   );
-  return distanceInMeters;
+  return distanceInMeters; // 距離をメートルで返す
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:pochi/import.dart';
+import 'dart:async';
 
 void main() {
   runApp(const MyApp());
@@ -7,6 +8,11 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   Timer.periodic(const Duration(seconds: 5), flash);
+  // }
 
   @override
   Widget build(BuildContext context) {

@@ -15,8 +15,10 @@ class HomeViewState extends State<HomeView> {
   // LocationData? _currentLocation;
   final location = Location();
   LocationData? startPoint = null;
-  LocationData? lastPoint = null;
+  // LocationData? lastPoint = null;
+  LocationData? checkPoint = null;
   double distance = 0;
+  double sum = 0;
 
   void _requestLocationPermission() async {
     await RequestLocationPermission.request(location);
@@ -35,20 +37,38 @@ class HomeViewState extends State<HomeView> {
     });
   }
 
-  void _lastLocation() async {
+  void _checkPointLocation() async {
     var point = await getPosition(location);
     setState(() {
-      lastPoint = point;
+      checkPoint = point;
     });
     _calculateDistance();
   }
 
   void _calculateDistance() async {
     //距離の計算
-    var temp = await getDistance(startPoint, lastPoint);
+    var temp = await getDistance(startPoint, checkPoint);
     print(temp);
     setState(() {
       distance = temp ?? 0;
+    });
+    _sumDistance(distance);
+  }
+
+  void _sumDistance(distance) async {
+    // 測定した距離をsumに加算
+    var temp = await distance;
+    setState(() {
+      sum += temp;
+    });
+    _locationReset();
+  }
+
+  void _locationReset() async {
+    var start = await startPoint;
+    var last = await checkPoint;
+    setState(() {
+      start = last;
     });
   }
 
@@ -69,10 +89,12 @@ class HomeViewState extends State<HomeView> {
               child: Column(
                 children: [
                   Text(
-                    '始点の座標：$startPoint 終点の座標：$lastPoint',
+                    '始点の座標：$startPoint',
                     style: Theme.of(context).textTheme.bodyLarge,
                   ),
-                  Text('始点と終点の距離：$distance'),
+                  Text('チェックポイントの座標：$checkPoint'),
+                  Text('始点とチェックポイントの距離：$distance'),
+                  Text('距離の合計 $sum'),
                 ],
               ),
             ),
@@ -100,8 +122,8 @@ class HomeViewState extends State<HomeView> {
                   height: 50,
                   width: 105,
                   child: ElevatedButton(
-                    onPressed: _lastLocation,
-                    child: const Text('終了'),
+                    onPressed: _checkPointLocation,
+                    child: const Text('チェックポイント'),
                   ),
                 ),
               ],
