@@ -40,7 +40,8 @@ class _MyMapState extends State<MyMap> {
         CameraPosition(
             target: LatLng(
                 _currentPosition!.latitude, _currentPosition!.longitude
-            )
+            ),
+          zoom: 20
         )
       )
     );
@@ -63,11 +64,13 @@ class _MyMapState extends State<MyMap> {
           _mapController = controller;
         },
         initialCameraPosition: CameraPosition(
-            target: LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
-            zoom: 10
+          target: LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
+          zoom: 20,
+          bearing: _currentPosition!.heading,
         ),
         myLocationEnabled: true,
         myLocationButtonEnabled: false,
+        compassEnabled: true,
 
         markers: {
           Marker(
