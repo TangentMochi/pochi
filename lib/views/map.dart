@@ -87,6 +87,7 @@ class _MyMapState extends State<MyMap> {
         ),
         myLocationEnabled: true,
         myLocationButtonEnabled: false,
+        compassEnabled: true,
 
         markers: {
           Marker(
