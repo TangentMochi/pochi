@@ -27,7 +27,7 @@ class MyAchive extends StatefulWidget {
 
 class _MyAchiveState extends State<MyAchive> {
   void BackPage() {
-    setState(() {});
+    Navigator.pop(context);
   }
 
   double sum = 60;

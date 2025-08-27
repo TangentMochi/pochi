@@ -1,6 +1,5 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
+import 'package:pochi/views/achive.dart';
 import 'package:pochi/views/map.dart';
 
 class DistanceAddPage extends StatefulWidget {
@@ -60,6 +59,19 @@ class DistanceAddPageState extends State<DistanceAddPage> {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  const MyAchive(title: 'My Achievements'), // Corrected line
+            ),
+          );
+        },
+        tooltip: 'Achive',
+        child: const Icon(Icons.celebration),
       ),
     );
   }
