@@ -21,28 +21,37 @@ class _MyMapState extends State<MyMap> {
     requestLocationPermission().catchError((err) {
 
     }).then((temp) {
+      getPosition().then((position) {
+        setState(() {
+          _currentPosition = position;
+        });
+      });
       getSetting().then((setting) {
         print(setting.accuracy);
         _positionStream = Geolocator.getPositionStream(locationSettings: setting).listen((position) {
-          setState(() {
-            _currentPosition = position;
-          });
+          setPosition(position);
         });
       });
     });
+  }
 
+  Future<void> setPosition(Position position) async {
+    var dist = await getDistance(_currentPosition, position);
 
+    setState(() {
+      _currentPosition = position;
+    });
+    _mapController.animateCamera(
+        CameraUpdate.newLatLng(
+            LatLng(_currentPosition!.latitude, _currentPosition!.longitude)
+        )
+    );
   }
 
   void myLocationButton() {
-    _mapController.moveCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(
-            target: LatLng(
-                _currentPosition!.latitude, _currentPosition!.longitude
-            ),
-          zoom: 20
-        )
+    _mapController.animateCamera(
+      CameraUpdate.newLatLng(
+          LatLng(_currentPosition!.latitude, _currentPosition!.longitude)
       )
     );
   }
@@ -56,6 +65,7 @@ class _MyMapState extends State<MyMap> {
         child: CircularProgressIndicator(),
       );
     }
+
     return Scaffold(
       appBar: AppBar(title: Text('Pochi')),
       body: GoogleMap(
@@ -66,18 +76,9 @@ class _MyMapState extends State<MyMap> {
         initialCameraPosition: CameraPosition(
           target: LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
           zoom: 20,
-          bearing: _currentPosition!.heading,
         ),
         myLocationEnabled: true,
         myLocationButtonEnabled: false,
-        compassEnabled: true,
-
-        markers: {
-          Marker(
-            markerId: MarkerId('currentLocation'),
-            position: LatLng(37.7749, -122.4194),
-          ),
-        },
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: myLocationButton,

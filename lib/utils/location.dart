@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 
@@ -66,8 +67,34 @@ Future<Position> getPosition() async {
 }
 
 Future<LocationSettings> getSetting() async {
-  return LocationSettings(
-    accuracy: await isPreciseLocation() ? LocationAccuracy.bestForNavigation : LocationAccuracy.low
-  );
+  if (defaultTargetPlatform == TargetPlatform.android) {
+    return AndroidSettings(
+        accuracy: await isPreciseLocation() ? LocationAccuracy.bestForNavigation : LocationAccuracy.low,
+        distanceFilter: 0,
+        forceLocationManager: true,
+        intervalDuration: const Duration(microseconds: 1000),
+        //(Optional) Set foreground notification config to keep the app alive
+        //when going to the background
+        foregroundNotificationConfig: const ForegroundNotificationConfig(
+          notificationText:
+          "Pochi will continue to receive your location even when you aren't using it",
+          notificationTitle: "Running in Background",
+          enableWakeLock: false,
+        )
+    );
+  } else if (defaultTargetPlatform == TargetPlatform.iOS || defaultTargetPlatform == TargetPlatform.macOS) {
+    return AppleSettings(
+      accuracy: await isPreciseLocation() ? LocationAccuracy.high : LocationAccuracy.low,
+      activityType: ActivityType.fitness,
+      distanceFilter: 0,
+      pauseLocationUpdatesAutomatically: true,
+      // Only set to true if our app will be started up in the background.
+      showBackgroundLocationIndicator: false,
+    );
+  } else {
+    return LocationSettings(
+      accuracy: await isPreciseLocation() ? LocationAccuracy.bestForNavigation : LocationAccuracy.low,
+    );
+  }
 }
 
