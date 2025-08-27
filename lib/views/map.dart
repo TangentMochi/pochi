@@ -41,12 +41,8 @@ class _MyMapState extends State<MyMap> {
   }
 
   void myLocationButton() {
-    _mapController.moveCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(
-            target: LatLng(
-                _currentPosition!.latitude, _currentPosition!.longitude
-            )
+            ),
+            zoom: 10
         )
       )
     );
