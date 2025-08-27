@@ -8,7 +8,9 @@ class Achivement extends StatelessWidget {
     return MaterialApp(
       title: 'Achivement',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: const Color.fromARGB(255, 160, 205, 233),
+        ),
       ),
       home: const MyAchive(title: 'Achivement'),
     );
@@ -28,24 +30,36 @@ class _MyAchiveState extends State<MyAchive> {
     setState(() {});
   }
 
-  double sum = 20;
+  double sum = 60;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: Text(
+          widget.title,
+          style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold),
+        ),
       ),
       body: Center(
         child: Column(
           children: <Widget>[
             SizedBox(height: 25),
             (sum >= 10)
-                ? Image.network(
-                    "https://hamarepo.com/writer/story/images/images/hamarepo/matsuyama_yusuke/2014/07/20140711pochi/000.JPG",
-                    width: 250, // 画像の幅を250ピクセルに設定
-                    height: 150, // 画像の高さを150ピクセルに設定
+                ? Container(
+                    width: 200,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.blue, width: 5),
+                    ),
+                    child: ClipRRect(
+                      child: Image.network(
+                        "https://images.dog.ceo/breeds/frise-bichon/4.jpg",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   )
                 : Container(
                     color: Colors.grey,
@@ -61,10 +75,19 @@ class _MyAchiveState extends State<MyAchive> {
                   ),
             SizedBox(height: 25),
             (sum >= 20)
-                ? Image.network(
-                    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvxF9_HXEMI3ahWw4WNZuiQqiGolR3IR5hEg&s",
-                    width: 250,
+                ? Container(
+                    width: 200,
                     height: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.blue, width: 5),
+                    ),
+                    child: ClipRRect(
+                      child: Image.network(
+                        "https://hamarepo.com/writer/story/images/images/hamarepo/matsuyama_yusuke/2014/07/20140711pochi/000.JPG",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   )
                 : Container(
                     color: Colors.grey,
@@ -74,16 +97,25 @@ class _MyAchiveState extends State<MyAchive> {
 
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text("20kmで表示")],
+                        children: [Text("10kmで表示")],
                       ),
                     ),
                   ),
             SizedBox(height: 25),
             (sum >= 30)
-                ? Image.network(
-                    "https://images.dog.ceo/breeds/labradoodle/Cali.jpg",
-                    width: 250,
+                ? Container(
+                    width: 200,
                     height: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.blue, width: 5),
+                    ),
+                    child: ClipRRect(
+                      child: Image.network(
+                        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQvxF9_HXEMI3ahWw4WNZuiQqiGolR3IR5hEg&s",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   )
                 : Container(
                     color: Colors.grey,
@@ -93,16 +125,25 @@ class _MyAchiveState extends State<MyAchive> {
 
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text("30kmで表示")],
+                        children: [Text("10kmで表示")],
                       ),
                     ),
                   ),
             SizedBox(height: 25),
             (sum >= 40)
-                ? Image.network(
-                    "https://images.dog.ceo/breeds/frise-bichon/4.jpg",
-                    width: 250,
+                ? Container(
+                    width: 200,
                     height: 150,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border.all(color: Colors.blue, width: 5),
+                    ),
+                    child: ClipRRect(
+                      child: Image.network(
+                        "https://images.dog.ceo/breeds/labradoodle/Cali.jpg",
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   )
                 : Container(
                     color: Colors.grey,
@@ -112,13 +153,14 @@ class _MyAchiveState extends State<MyAchive> {
 
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text("40kmで表示")],
+                        children: [Text("10kmで表示")],
                       ),
                     ),
                   ),
           ],
         ),
       ),
+      backgroundColor: const Color.fromARGB(255, 185, 251, 255),
       floatingActionButton: FloatingActionButton(
         onPressed: BackPage,
         tooltip: 'Increment',
