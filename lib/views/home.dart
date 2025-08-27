@@ -13,10 +13,8 @@ class HomeView extends StatefulWidget {
 }
 
 class HomeViewState extends State<HomeView> {
-  // LocationData? _currentLocation;
   final location = Location();
   LocationData? startPoint = null;
-  // LocationData? lastPoint = null;
   LocationData? checkPoint = null;
   double distance = 0;
   double sum = 0;
@@ -26,12 +24,6 @@ class HomeViewState extends State<HomeView> {
     await RequestLocationPermission.request(location);
   }
 
-  // void _getLocation() {
-  //   GetLocation.getPosition(
-  //     location,
-  //   ).then((value) => setState(() => _currentLocation = value));
-  // }
-
   void _startLocation() async {
     var point = await getPosition(location);
     setState(() {
@@ -40,7 +32,6 @@ class HomeViewState extends State<HomeView> {
     _startMeasurement();
   }
 
-  @override
   void _startMeasurement() {
     Timer.periodic(const Duration(seconds: 5), (timer) {
       _checkPointLocation();
@@ -118,8 +109,6 @@ class HomeViewState extends State<HomeView> {
               ),
             ),
             Column(
-              // alignment: MainAxisAlignment.center,
-              // buttonPadding: const EdgeInsets.all(10),
               children: [
                 SizedBox(
                   height: 50,
@@ -129,6 +118,7 @@ class HomeViewState extends State<HomeView> {
                     child: const Text('request'),
                   ),
                 ),
+                SizedBox(height: 20),
                 SizedBox(
                   height: 50,
                   width: 105,
@@ -137,14 +127,7 @@ class HomeViewState extends State<HomeView> {
                     child: const Text('開始'),
                   ),
                 ),
-                // SizedBox(
-                //   height: 50,
-                //   width: 105,
-                //   child: ElevatedButton(
-                //     onPressed: _checkPointLocation,
-                //     child: const Text('チェックポイント'),
-                //   ),
-                // ),
+                SizedBox(height: 20),
                 SizedBox(
                   height: 50,
                   width: 105,
