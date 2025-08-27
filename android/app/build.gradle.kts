@@ -1,6 +1,6 @@
 import java.util.*
 
-apply(from=project(':flutter_config').projectDir.getPath() + "/dotenv.gradle")
+apply(from=project(":flutter_config").projectDir.getPath() + "/dotenv.gradle")
 
 plugins {
     id("com.android.application")
@@ -15,12 +15,12 @@ android {
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     defaultConfig {
@@ -42,6 +42,11 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
 }
 
 flutter {

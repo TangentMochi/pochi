@@ -113,10 +113,11 @@ packages:
   flutter_config:
     dependency: "direct main"
     description:
-      name: flutter_config
-      sha256: a07e6156bb6e776e29c6357be433155acda87d1dab1a3f787a72091a1b71ffbf
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: master
+      resolved-ref: d7c3cf014e9651e0d6c75596fd44cbc6ab42f8a8
+      url: "https://github.com/dev-mahmoud-elshenawy/flutter_config-flutter3.29.0-fix"
+    source: git
     version: "2.0.2"
   flutter_lints:
     dependency: "direct dev"
@@ -352,30 +353,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.1"
-  location:
-    dependency: "direct main"
-    description:
-      name: location
-      sha256: b080053c181c7d152c43dd576eec6436c40e25f326933051c330da563ddd5333
-      url: "https://pub.dev"
-    source: hosted
-    version: "8.0.1"
-  location_platform_interface:
-    dependency: transitive
-    description:
-      name: location_platform_interface
-      sha256: ca8700bb3f6b1e8b2afbd86bd78b2280d116c613ca7bfa1d4d7b64eba357d749
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.1"
-  location_web:
-    dependency: transitive
-    description:
-      name: location_web
-      sha256: b8e3add5efe0d65c5e692b7a135d80a4015c580d3ea646fa71973e97668dd868
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.1"
   matcher:
     dependency: transitive
     description:
