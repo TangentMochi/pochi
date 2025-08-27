@@ -18,43 +18,39 @@ class _MyMapState extends State<MyMap> {
   @override
   void initState() {
     super.initState();
-    requestLocationPermission().catchError((err) {
-
-    }).then((temp) {
+    requestLocationPermission().catchError((err) {}).then((temp) {
       getSetting().then((setting) {
         print(setting.accuracy);
-        _positionStream = Geolocator.getPositionStream(locationSettings: setting).listen((position) {
-          setState(() {
-            _currentPosition = position;
-          });
-        });
+        _positionStream =
+            Geolocator.getPositionStream(locationSettings: setting).listen((
+              position,
+            ) {
+              setState(() {
+                _currentPosition = position;
+              });
+            });
       });
     });
-
-
   }
 
   void myLocationButton() {
     _mapController.moveCamera(
       CameraUpdate.newCameraPosition(
         CameraPosition(
-            target: LatLng(
-                _currentPosition!.latitude, _currentPosition!.longitude
-            ),
-          zoom: 20
-        )
-      )
+          target: LatLng(
+            _currentPosition!.latitude,
+            _currentPosition!.longitude,
+          ),
+          zoom: 20,
+        ),
+      ),
     );
   }
-
-
 
   @override
   Widget build(BuildContext context) {
     if (_currentPosition == null) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
+      return Center(child: CircularProgressIndicator());
     }
     return Scaffold(
       appBar: AppBar(title: Text('Pochi')),
@@ -64,7 +60,10 @@ class _MyMapState extends State<MyMap> {
           _mapController = controller;
         },
         initialCameraPosition: CameraPosition(
-          target: LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
+          target: LatLng(
+            _currentPosition!.latitude,
+            _currentPosition!.longitude,
+          ),
           zoom: 20,
           bearing: _currentPosition!.heading,
         ),
