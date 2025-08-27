@@ -18,8 +18,14 @@ class _MyMapState extends State<MyMap> {
   @override
   void initState() {
     super.initState();
-    requestLocationPermission().catchError((err) {
-
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('Location permission denied. Please enable location access in settings.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      });
     }).then((temp) {
       getSetting().then((setting) {
         print(setting.accuracy);
