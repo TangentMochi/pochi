@@ -204,11 +204,13 @@ class _RouteCreateState extends State<RouteCreate> {
                             LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
                             LatLng(_currentPosition!.latitude, _currentPosition!.longitude)
                           );
-
+                          // TODO: ここで遷移させる。
+                          /*
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => RouteView(route: ret)),
                           );
+                           */
                         },
                         child: const Text('この経路でルートを生成する'),
                       ),
