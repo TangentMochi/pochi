@@ -20,7 +20,15 @@ class StartPageState extends State<StartPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            FloatingActionButton(
+            ElevatedButton(
+              onPressed: () {
+                Navigator.of(
+                  context,
+                ).push(MaterialPageRoute(builder: (context) => RouteCreate()));
+              },
+              child: const Text('始める'),
+            ),
+            ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
@@ -31,17 +39,7 @@ class StartPageState extends State<StartPage> {
                   ),
                 );
               },
-              tooltip: 'Achive',
-              child: const Icon(Icons.celebration),
-            ),
-            FloatingActionButton(
-              onPressed: () {
-                Navigator.of(
-                  context,
-                ).push(MaterialPageRoute(builder: (context) => RouteCreate()));
-              },
-              tooltip: 'routeCreate',
-              child: const Icon(Icons.play_arrow),
+              child: const Text('Achievement')
             ),
           ],
         ),
