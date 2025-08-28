@@ -8,10 +8,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MyMap extends StatefulWidget {
-  final String distance;
-  // Stateful(this.distance);
+  final ResultRoute route;
 
-  const MyMap({super.key, required this.distance});
+  const MyMap({super.key, required this.route});
 
   @override
   _MyMapState createState() => _MyMapState();
@@ -30,31 +29,32 @@ class _MyMapState extends State<MyMap> {
   void initState() {
     super.initState();
     loadTotalDistance();
-    requestLocationPermission().catchError((err) {
-
-    }).then((temp) {
+    requestLocationPermission().catchError((err) {}).then((temp) {
       getPosition().then((position) {
         setState(() {
           _currentPosition = position;
         });
       });
       getSetting().then((setting) {
-        _positionStream = Geolocator.getPositionStream(locationSettings: setting).listen((position) {
-          setPosition(position);
-        });
+        _positionStream =
+            Geolocator.getPositionStream(locationSettings: setting).listen((
+              position,
+            ) {
+              setPosition(position);
+            });
       });
     });
   }
 
   Future<void> setPosition(Position position) async {
     setState(() {
-    _currentPosition = position;
+      _currentPosition = position;
     });
 
     _mapController.animateCamera(
-        CameraUpdate.newLatLng(
-            LatLng(_currentPosition!.latitude, _currentPosition!.longitude)
-        )
+      CameraUpdate.newLatLng(
+        LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
+      ),
     );
   }
 
@@ -81,8 +81,8 @@ class _MyMapState extends State<MyMap> {
   void myLocationButton() {
     _mapController.animateCamera(
       CameraUpdate.newLatLng(
-          LatLng(_currentPosition!.latitude, _currentPosition!.longitude)
-      )
+        LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
+      ),
     );
   }
 
@@ -135,12 +135,10 @@ class _MyMapState extends State<MyMap> {
   @override
   Widget build(BuildContext context) {
     if (_currentPosition == null) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
+      return Center(child: CircularProgressIndicator());
     }
     return Scaffold(
-      appBar: AppBar(title: Text('${widget.distance}')),
+      appBar: AppBar(title: Text('${widget.route.distance}')),
       body: Stack(
         children: [
           GoogleMap(
@@ -158,13 +156,18 @@ class _MyMapState extends State<MyMap> {
             myLocationEnabled: true,
             myLocationButtonEnabled: false,
             compassEnabled: true,
-
-            markers: {
-              Marker(
-                markerId: MarkerId('currentLocation'),
-                position: LatLng(37.7749, -122.4194),
-              ),
-            },
+            polylines: widget.route.points.map((val) {
+              return Polyline(
+                polylineId: PolylineId(
+                  '${val.first.latitude},${val.first.longitude}',
+                ),
+                points: val.map((val) {
+                  return LatLng(val.latitude, val.longitude);
+                }).toList(),
+                color: Colors.blue,
+                width: 5,
+              );
+            }).toSet(),
           ),
           Positioned(
             top: 10,

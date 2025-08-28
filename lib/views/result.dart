@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:pochi/views/distanceAddPage.dart';
+import 'package:pochi/views/startPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -78,12 +78,9 @@ class _ResultPageState extends State<ResultPage>
 
   void _resultBackPage() {
     setState(() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const DistanceAddPage(), // Corrected line
-        ),
-      );
+      Navigator.popUntil(context, (route) {
+        return route.isFirst;
+      });
     });
   }
 

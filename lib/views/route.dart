@@ -4,12 +4,12 @@ import 'package:bottom_sheet_bar/bottom_sheet_bar.dart';
 import 'package:flutter/material.dart' hide Route;
 import 'package:flutter_overpass/flutter_overpass.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:pochi/import.dart' ;
+import 'package:pochi/import.dart';
 import 'package:geolocator/geolocator.dart';
 
 class RouteCreate extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() =>_RouteCreateState();
+  State<StatefulWidget> createState() => _RouteCreateState();
 }
 
 class _RouteCreateState extends State<RouteCreate> {
@@ -30,9 +30,7 @@ class _RouteCreateState extends State<RouteCreate> {
   @override
   void initState() {
     _bsbController.addListener(_onBsbChanged);
-    requestLocationPermission().catchError((err) {
-
-    }).then((temp) {
+    requestLocationPermission().catchError((err) {}).then((temp) {
       getPosition().then((position) {
         setState(() {
           _currentPosition = position;
@@ -66,12 +64,11 @@ class _RouteCreateState extends State<RouteCreate> {
   }
 
   void myLocationButton() {
-    var newLatLng = LatLng(_currentPosition!.latitude, _currentPosition!.longitude);
-    _mapController.animateCamera(
-        CameraUpdate.newLatLng(
-            newLatLng
-        )
+    var newLatLng = LatLng(
+      _currentPosition!.latitude,
+      _currentPosition!.longitude,
     );
+    _mapController.animateCamera(CameraUpdate.newLatLng(newLatLng));
   }
 
   void fetchRouteSpots() async {
@@ -79,11 +76,13 @@ class _RouteCreateState extends State<RouteCreate> {
     final southWest = region.southwest;
     final northEast = region.northeast;
 
-    var nodes = await flutterOverpass.rawOverpassQL(query: "("
-        "node(${southWest.latitude}, ${southWest.longitude}, ${northEast.latitude}, ${northEast.longitude})[amenity];"
-        "node(${southWest.latitude}, ${southWest.longitude}, ${northEast.latitude}, ${northEast.longitude})[leisure];"
-        ");"
-        "out;"
+    var nodes = await flutterOverpass.rawOverpassQL(
+      query:
+          "("
+          "node(${southWest.latitude}, ${southWest.longitude}, ${northEast.latitude}, ${northEast.longitude})[amenity];"
+          "node(${southWest.latitude}, ${southWest.longitude}, ${northEast.latitude}, ${northEast.longitude})[leisure];"
+          ");"
+          "out;",
     );
 
     var temp = List<RouteSpot>.empty(growable: true);
@@ -96,8 +95,8 @@ class _RouteCreateState extends State<RouteCreate> {
           element['tags']['amenity'],
           (spot) {
             askAddRouteSpot(spot);
-          }
-        )
+          },
+        ),
       );
     }
     setState(() {
@@ -120,9 +119,7 @@ class _RouteCreateState extends State<RouteCreate> {
   @override
   Widget build(BuildContext context) {
     if (_currentPosition == null) {
-      return Center(
-        child: CircularProgressIndicator(),
-      );
+      return Center(child: CircularProgressIndicator());
     }
 
     var markers = Set<Marker>();
@@ -169,24 +166,19 @@ class _RouteCreateState extends State<RouteCreate> {
               controller: scrollController,
               shrinkWrap: true,
               slivers: [
-                SliverAppBar(
-                  title: const Text('追加された経路'),
-                ),
+                SliverAppBar(title: const Text('追加された経路')),
                 SliverFixedExtentList(
                   itemExtent: 128,
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      var spot = _route.spots[index];
-                      return ListTile(
-                        title: Text('${spot.title}'),
-                        subtitle: Text('(${spot.position.latitude}, ${spot.position.longitude})'),
-                        onTap: () {
-
-                        },
-                      );
-                    },
-                    childCount: _route.length
-                  ),
+                  delegate: SliverChildBuilderDelegate((context, index) {
+                    var spot = _route.spots[index];
+                    return ListTile(
+                      title: Text('${spot.title}'),
+                      subtitle: Text(
+                        '(${spot.position.latitude}, ${spot.position.longitude})',
+                      ),
+                      onTap: () {},
+                    );
+                  }, childCount: _route.length),
                 ),
                 SliverFillRemaining(
                   hasScrollBody: false, // スクロールビューの本体として機能しないことを指定
@@ -201,16 +193,23 @@ class _RouteCreateState extends State<RouteCreate> {
                           }
 
                           var ret = await _route.computeRoute(
-                            LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
-                            LatLng(_currentPosition!.latitude, _currentPosition!.longitude)
+                            LatLng(
+                              _currentPosition!.latitude,
+                              _currentPosition!.longitude,
+                            ),
+                            LatLng(
+                              _currentPosition!.latitude,
+                              _currentPosition!.longitude,
+                            ),
                           );
                           // TODO: ここで遷移させる。
-                          /*
+
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => RouteView(route: ret)),
+                            MaterialPageRoute(
+                              builder: (context) => MyMap(route: ret),
+                            ),
                           );
-                           */
                         },
                         child: const Text('この経路でルートを生成する'),
                       ),
@@ -229,7 +228,9 @@ class _RouteCreateState extends State<RouteCreate> {
           },
           initialCameraPosition: CameraPosition(
             target: LatLng(
-                _currentPosition!.latitude, _currentPosition!.longitude),
+              _currentPosition!.latitude,
+              _currentPosition!.longitude,
+            ),
             zoom: 20,
           ),
           myLocationEnabled: true,
@@ -241,18 +242,23 @@ class _RouteCreateState extends State<RouteCreate> {
           },
           onLongPress: (position) {
             askAddRouteSpot(
-              RouteSpot(position, MarkerId('S${DateTime.now().millisecondsSinceEpoch.toString()}'), '', '', (spot) {
-
-              })
+              RouteSpot(
+                position,
+                MarkerId(
+                  'S${DateTime.now().millisecondsSinceEpoch.toString()}',
+                ),
+                '',
+                '',
+                (spot) {},
+              ),
             );
-          }
+          },
         ),
       ),
-      floatingActionButton:
-        FloatingActionButton(
-          onPressed: myLocationButton,
-          child: Icon(Icons.my_location),
-        )
+      floatingActionButton: FloatingActionButton(
+        onPressed: myLocationButton,
+        child: Icon(Icons.my_location),
+      ),
     );
   }
 }
@@ -277,7 +283,8 @@ class RouteSpotView extends StatelessWidget {
               onPressed: () {
                 _popRouteSpot(context);
               },
-              child: const Text('このポイントを経路に追加'))
+              child: const Text('このポイントを経路に追加'),
+            ),
           ],
         ),
       ),
@@ -305,7 +312,9 @@ class RouteView extends StatelessWidget {
             },
             initialCameraPosition: CameraPosition(
               target: LatLng(
-                  _route.points.first.first.latitude, _route.points.first.first.longitude),
+                _route.points.first.first.latitude,
+                _route.points.first.first.longitude,
+              ),
               zoom: 20,
             ),
             myLocationEnabled: true,
@@ -313,7 +322,9 @@ class RouteView extends StatelessWidget {
             zoomControlsEnabled: false,
             polylines: _route.points.map((val) {
               return Polyline(
-                polylineId: PolylineId('${val.first.latitude},${val.first.longitude}'),
+                polylineId: PolylineId(
+                  '${val.first.latitude},${val.first.longitude}',
+                ),
                 points: val.map((val) {
                   return LatLng(val.latitude, val.longitude);
                 }).toList(),
@@ -323,7 +334,7 @@ class RouteView extends StatelessWidget {
             }).toSet(),
           ),
         ],
-      )
+      ),
     );
   }
 }
