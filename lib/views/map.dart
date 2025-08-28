@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pochi/import.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MyMap extends StatefulWidget {
   final String distance;
@@ -20,12 +21,16 @@ class _MyMapState extends State<MyMap> {
   Position? _currentPosition;
   late StreamSubscription<Position> _positionStream;
 
+  double currentDistance = 0; // 2地点での距離
+  double currentSum = 0; // 現在歩いた距離
+  double totalDistance = 0; // 今までに歩いた距離
+
   @override
   void initState() {
     super.initState();
+    loadTotalDistance();
     requestLocationPermission().catchError((err) {}).then((temp) {
       getSetting().then((setting) {
-        print(setting.accuracy);
         _positionStream =
             Geolocator.getPositionStream(locationSettings: setting).listen((
               position,
@@ -36,6 +41,19 @@ class _MyMapState extends State<MyMap> {
             });
       });
     });
+  }
+
+  void loadTotalDistance() async {
+    final prefs = await SharedPreferences.getInstance();
+    totalDistance = prefs.getDouble('totalDistance') ?? 0; // キーから値を取得、なければ0
+    setState(() {
+      totalDistance = prefs.getDouble('totalDistance') ?? 0; // キーから値を取得、なければ0
+    });
+  }
+
+  void saveTotalDistance() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('totalDistance', totalDistance); // キーに値を保存
   }
 
   @override
@@ -56,6 +74,42 @@ class _MyMapState extends State<MyMap> {
         ),
       ),
     );
+  }
+
+  void calculateCurrentDistance() async {
+    Position? startLocation;
+    Position? lastLocation;
+
+    startLocation = _currentPosition;
+    debugPrint('1段階');
+    debugPrint('startLocation, $startLocation');
+
+    Timer.periodic(Duration(seconds: 5), (timer) async {
+      lastLocation = await _currentPosition;
+      debugPrint('lastLocation, $lastLocation');
+
+      double temp = await getDistance(startLocation, lastLocation);
+      debugPrint('2段階, $temp');
+
+      setState(() {
+        currentDistance = temp;
+        currentSum += currentDistance;
+        startLocation = lastLocation;
+      });
+      debugPrint('3段階');
+      debugPrint('currentSum, $currentSum');
+      debugPrint('startLocation, $startLocation');
+      culculateTotalDistance();
+    });
+  }
+
+  void culculateTotalDistance() async {
+    debugPrint('4段階, $totalDistance');
+    double updateTotalDistance = await updateAndSaveTotalDistance(currentSum);
+
+    setState(() {
+      totalDistance = updateTotalDistance;
+    });
   }
 
   @override
@@ -100,7 +154,7 @@ class _MyMapState extends State<MyMap> {
                 color: Colors.white70,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text('現在の距離 km'), // 変数を表示
+              child: Text('現在の距離 $currentSum'), // 変数を表示
             ),
           ),
           Positioned(
@@ -113,7 +167,7 @@ class _MyMapState extends State<MyMap> {
                 color: Colors.white70,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text('今までに歩いた距離 km'), // 変数を表示
+              child: Text('今までに歩いた距離 $totalDistance'), // 変数を表示
             ),
           ),
 
@@ -123,6 +177,14 @@ class _MyMapState extends State<MyMap> {
             child: FloatingActionButton(
               onPressed: myLocationButton,
               child: Icon(Icons.my_location),
+            ),
+          ),
+          Positioned(
+            bottom: 200,
+            right: 200,
+            child: FloatingActionButton(
+              onPressed: calculateCurrentDistance,
+              child: Icon(Icons.start),
             ),
           ),
         ],
