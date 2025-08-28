@@ -6,6 +6,7 @@ import 'package:pochi/import.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:pochi/views/result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class MyMap extends StatefulWidget {
   final String distance;

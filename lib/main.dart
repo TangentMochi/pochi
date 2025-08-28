@@ -15,7 +15,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: title,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Color.fromARGB(255, 149, 60, 46),
+          primary: Colors.black,
+          surface: Color.fromARGB(255, 251, 230, 203),
+        ),
         useMaterial3: true,
       ),
       home: DistanceAddPage(),

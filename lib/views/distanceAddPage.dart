@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pochi/views/achive.dart';
 import 'package:pochi/views/map.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class DistanceAddPage extends StatefulWidget {
   const DistanceAddPage({super.key});
