@@ -115,11 +115,10 @@ class _MyMapState extends State<MyMap> {
 
   void resultPage() {
     saveTotalDistance();
-    Navigator.push(
-      context,
+    Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) =>
-            const ResultPage(title: 'Result'), // Corrected line
+            ResultPage(title: 'result', distanceValue: currentSum),
       ),
     );
   }
