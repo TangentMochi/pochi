@@ -163,7 +163,7 @@ class _ResultPageState extends State<ResultPage>
                   const SizedBox(height: 25),
                   _buildRainbowShader(
                     Text(
-                      "今回の記録${widget.distanceValue} m",
+                      "今回の記録${widget.distanceValue.toStringAsFixed(3)} m",
                       style: const TextStyle(
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,
@@ -173,7 +173,7 @@ class _ResultPageState extends State<ResultPage>
                   ),
                   _buildRainbowShader(
                     Text(
-                      "これまで走った距離${allDistanceValue} m",
+                      "これまで走った距離${allDistanceValue.toStringAsFixed(3)} m",
                       style: const TextStyle(
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,

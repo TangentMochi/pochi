@@ -175,7 +175,7 @@ class _MyMapState extends State<MyMap> {
                 color: Colors.white70,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text('現在の距離 $currentSum'), // 変数を表示
+              child: Text('現在の距離 ${currentSum.toStringAsFixed(3)}'), // 変数を表示
             ),
           ),
           Positioned(
@@ -188,7 +188,9 @@ class _MyMapState extends State<MyMap> {
                 color: Colors.white70,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text('今までに歩いた距離 $totalDistance'), // 変数を表示
+              child: Text(
+                '今までに歩いた距離 ${totalDistance.toStringAsFixed(3)}',
+              ), // 変数を表示
             ),
           ),
 
