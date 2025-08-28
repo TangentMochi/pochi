@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+  bottom_sheet_bar:
+    dependency: "direct main"
+    description:
+      name: bottom_sheet_bar
+      sha256: "96a31d48734df5cf56ef7b617ab21f143cb8bc0e7a5dbbb6db4c364f1d4632d6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.11"
   characters:
     dependency: transitive
     description:
@@ -81,6 +89,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.11"
+  dio:
+    dependency: transitive
+    description:
+      name: dio
+      sha256: d90ee57923d1828ac14e492ca49440f65477f4bb1263575900be731a3dac66a9
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.9.0"
+  dio_web_adapter:
+    dependency: transitive
+    description:
+      name: dio_web_adapter
+      sha256: "7586e476d70caecaf1686d21eee7247ea43ef5c345eab9e0cc3583ff13378d78"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.1"
+  equatable:
+    dependency: transitive
+    description:
+      name: equatable
+      sha256: "567c64b3cb4cf82397aac55f4f0cbd3ca20d77c6c03bedbc4ceaddc08904aef7"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.7"
   fake_async:
     dependency: transitive
     description:
@@ -119,6 +151,14 @@ packages:
       url: "https://github.com/dev-mahmoud-elshenawy/flutter_config-flutter3.29.0-fix"
     source: git
     version: "2.0.2"
+  flutter_google_map_polyline_point:
+    dependency: "direct main"
+    description:
+      name: flutter_google_map_polyline_point
+      sha256: e3aa5a284fb868a3bbfa64fd6ff77b1e888384dcd2a55501b1908b9661df057f
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.2"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -127,6 +167,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.0"
+  flutter_overpass:
+    dependency: "direct main"
+    description:
+      name: flutter_overpass
+      sha256: "906e6eb0b3f31da136fa70161364293792688850589c310f4585873a12606fbc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
@@ -135,6 +183,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.0.29"
+  flutter_polyline_points:
+    dependency: "direct main"
+    description:
+      name: flutter_polyline_points
+      sha256: b67399f144784fcec86d947357ce05ac0c1ef86e928578faa697559c3f72b183
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -306,7 +362,7 @@ packages:
     source: hosted
     version: "0.15.6"
   http:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: http
       sha256: bb2ce4590bc2667c96f318d68cac1b5a7987ec819351d32b1c987239a815e007
@@ -321,6 +377,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.2"
+  json_annotation:
+    dependency: transitive
+    description:
+      name: json_annotation
+      sha256: "1ce844379ca14835a50d2f019a3099f419082cfdd231cd86a142af94dd5c6bb1"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.9.0"
   leak_tracker:
     dependency: transitive
     description:
@@ -369,6 +433,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.11.1"
+  measure_size:
+    dependency: transitive
+    description:
+      name: measure_size
+      sha256: "5faef74474db7bbcd8c6f301d8a09abc69b8e999b85167825e532f1a55c38ae6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
   meta:
     dependency: transitive
     description:
@@ -377,6 +449,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.16.0"
+  mime:
+    dependency: transitive
+    description:
+      name: mime
+      sha256: "41a20518f0cb1256669420fdba0cd90d21561e560ac240f26ef8322e45bb7ed6"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   package_info_plus:
     dependency: transitive
     description:
