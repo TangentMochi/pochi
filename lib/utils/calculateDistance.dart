@@ -11,7 +11,7 @@ Future updateAndSaveTotalDistance(double currentSum) async {
   totalDistance += currentSum;
 
   await prefs.setDouble('totalDistance', totalDistance);
-  print('5段階, $totalDistance');
+  // print('5段階, $totalDistance');
 
   return totalDistance;
 }

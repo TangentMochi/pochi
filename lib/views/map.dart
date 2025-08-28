@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pochi/import.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:pochi/views/result.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class MyMap extends StatefulWidget {
@@ -81,35 +82,46 @@ class _MyMapState extends State<MyMap> {
     Position? lastLocation;
 
     startLocation = _currentPosition;
-    debugPrint('1段階');
-    debugPrint('startLocation, $startLocation');
+    // debugPrint('1段階');
+    // debugPrint('startLocation, $startLocation');
 
     Timer.periodic(Duration(seconds: 5), (timer) async {
       lastLocation = await _currentPosition;
       debugPrint('lastLocation, $lastLocation');
 
       double temp = await getDistance(startLocation, lastLocation);
-      debugPrint('2段階, $temp');
+      // debugPrint('2段階, $temp');
 
       setState(() {
         currentDistance = temp;
         currentSum += currentDistance;
         startLocation = lastLocation;
       });
-      debugPrint('3段階');
-      debugPrint('currentSum, $currentSum');
-      debugPrint('startLocation, $startLocation');
+      // debugPrint('3段階');
+      // debugPrint('currentSum, $currentSum');
+      // debugPrint('startLocation, $startLocation');
       culculateTotalDistance();
     });
   }
 
   void culculateTotalDistance() async {
-    debugPrint('4段階, $totalDistance');
+    // debugPrint('4段階, $totalDistance');
     double updateTotalDistance = await updateAndSaveTotalDistance(currentSum);
 
     setState(() {
       totalDistance = updateTotalDistance;
     });
+  }
+
+  void resultPage() {
+    saveTotalDistance();
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) =>
+            const ResultPage(title: 'Result'), // Corrected line
+      ),
+    );
   }
 
   @override
@@ -172,6 +184,7 @@ class _MyMapState extends State<MyMap> {
           ),
 
           Positioned(
+            // 現在位置
             bottom: 50,
             right: 20,
             child: FloatingActionButton(
@@ -180,11 +193,21 @@ class _MyMapState extends State<MyMap> {
             ),
           ),
           Positioned(
+            // 距離計測スタート（消す）
             bottom: 200,
             right: 200,
             child: FloatingActionButton(
               onPressed: calculateCurrentDistance,
               child: Icon(Icons.start),
+            ),
+          ),
+          Positioned(
+            // リザルト画面へ移動（消す）
+            bottom: 180,
+            right: 100,
+            child: FloatingActionButton(
+              onPressed: resultPage,
+              child: Icon(Icons.stop),
             ),
           ),
         ],

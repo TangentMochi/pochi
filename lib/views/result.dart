@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:pochi/views/distanceAddPage.dart';
 
 class ResultPageApp extends StatelessWidget {
   const ResultPageApp({super.key});
@@ -33,7 +34,14 @@ class _ResultPageState extends State<ResultPage> {
   double allDistanceValue = 20;
 
   void _resultBackPage() {
-    setState(() {});
+    setState(() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const DistanceAddPage(), // Corrected line
+        ),
+      );
+    });
   }
 
   Map<int, bool> results = {10: false, 20: false, 30: false, 40: false};
