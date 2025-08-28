@@ -188,6 +188,7 @@ class _MyMapState extends State<MyMap> {
             bottom: 50,
             right: 20,
             child: FloatingActionButton(
+              heroTag: 'location',
               onPressed: myLocationButton,
               child: Icon(Icons.my_location),
             ),
@@ -197,6 +198,7 @@ class _MyMapState extends State<MyMap> {
             bottom: 200,
             right: 200,
             child: FloatingActionButton(
+              heroTag: 'start',
               onPressed: calculateCurrentDistance,
               child: Icon(Icons.start),
             ),
@@ -206,6 +208,7 @@ class _MyMapState extends State<MyMap> {
             bottom: 180,
             right: 100,
             child: FloatingActionButton(
+              heroTag: 'stop',
               onPressed: resultPage,
               child: Icon(Icons.stop),
             ),

@@ -34,10 +34,10 @@ class ResultPage extends StatefulWidget {
   final double distanceValue;
 
   @override
-  State<ResultPage> createState() => _ResultPageState();
+  State<ResultPage> createState() => ResultPageState();
 }
 
-class _ResultPageState extends State<ResultPage>
+class ResultPageState extends State<ResultPage>
     with SingleTickerProviderStateMixin {
   int count = 0;
   double allDistanceValue = 0;
