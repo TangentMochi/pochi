@@ -44,6 +44,7 @@ class _MyMapState extends State<MyMap> {
             });
       });
     });
+    calculateCurrentDistance();
   }
 
   Future<void> setPosition(Position position) async {
@@ -91,31 +92,26 @@ class _MyMapState extends State<MyMap> {
     Position? lastLocation;
 
     startLocation = _currentPosition;
-    // debugPrint('1段階');
-    // debugPrint('startLocation, $startLocation');
 
     Timer.periodic(Duration(seconds: 5), (timer) async {
       lastLocation = await _currentPosition;
       debugPrint('lastLocation, $lastLocation');
 
       double temp = await getDistance(startLocation, lastLocation);
-      // debugPrint('2段階, $temp');
 
       setState(() {
         currentDistance = temp;
         currentSum += currentDistance;
         startLocation = lastLocation;
       });
-      // debugPrint('3段階');
-      // debugPrint('currentSum, $currentSum');
-      // debugPrint('startLocation, $startLocation');
       culculateTotalDistance();
     });
   }
 
   void culculateTotalDistance() async {
-    // debugPrint('4段階, $totalDistance');
-    double updateTotalDistance = await updateAndSaveTotalDistance(currentSum);
+    double updateTotalDistance = await updateAndSaveTotalDistance(
+      currentDistance,
+    );
 
     setState(() {
       totalDistance = updateTotalDistance;
@@ -183,7 +179,7 @@ class _MyMapState extends State<MyMap> {
             ),
           ),
           Positioned(
-            bottom: 40,
+            bottom: 50,
             left: 10,
             child: Container(
               padding: const EdgeInsets.all(8.0),
@@ -203,24 +199,18 @@ class _MyMapState extends State<MyMap> {
             child: FloatingActionButton(
               onPressed: myLocationButton,
               child: Icon(Icons.my_location),
+              heroTag: 'location',
             ),
           ),
-          Positioned(
-            // 距離計測スタート（消す）
-            bottom: 200,
-            right: 200,
-            child: FloatingActionButton(
-              onPressed: calculateCurrentDistance,
-              child: Icon(Icons.start),
-            ),
-          ),
+          SizedBox(height: 20),
           Positioned(
             // リザルト画面へ移動（消す）
-            bottom: 180,
-            right: 100,
+            top: 30,
+            left: 30,
             child: FloatingActionButton(
               onPressed: resultPage,
               child: Icon(Icons.stop),
+              heroTag: 'stop',
             ),
           ),
         ],
