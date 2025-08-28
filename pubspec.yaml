@@ -27,6 +27,7 @@ dependencies:
   flutter_polyline_points: ^3.0.1
   flutter_google_map_polyline_point: ^0.0.2
   shared_preferences: ^2.5.3
+  audioplayers: ^6.5.0
 
 dev_dependencies:
   flutter_test:
@@ -38,3 +39,4 @@ flutter:
 
 assets:
   - .env
+  - audio/ 

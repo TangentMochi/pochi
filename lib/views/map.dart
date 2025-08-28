@@ -134,7 +134,10 @@ class _MyMapState extends State<MyMap> {
       return Center(child: CircularProgressIndicator());
     }
     return Scaffold(
-      appBar: AppBar(title: Text('${widget.route.distance}')),
+      appBar: AppBar(
+        title: Text('${widget.route.distance}'),
+        backgroundColor: Color.fromARGB(250, 231, 117, 78),
+      ),
       body: Stack(
         children: [
           GoogleMap(

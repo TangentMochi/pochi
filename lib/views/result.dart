@@ -12,12 +12,12 @@ class ResultPageApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Result',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color.fromARGB(255, 110, 213, 132),
-        ),
-      ),
 
+      // theme: ThemeData(
+      //   colorScheme: ColorScheme.fromSeed(
+      //     seedColor: const Color.fromARGB(255, 110, 213, 132),
+      //   ),
+      // ),
       home: ResultPage(title: 'Result', distanceValue: distanceValue),
     );
   }
@@ -110,7 +110,7 @@ class _ResultPageState extends State<ResultPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        backgroundColor: Color.fromARGB(250, 231, 117, 78),
         title: Text(widget.title),
       ),
       body: Center(

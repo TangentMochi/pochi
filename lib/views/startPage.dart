@@ -3,6 +3,7 @@ import 'package:pochi/views/achive.dart';
 import 'package:pochi/views/map.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pochi/views/views.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class StartPage extends StatefulWidget {
   const StartPage({super.key});
@@ -13,9 +14,15 @@ class StartPage extends StatefulWidget {
 }
 
 class StartPageState extends State<StartPage> {
+  final _audio = AudioPlayer();
+
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('スタートページ'), centerTitle: true),
+      appBar: AppBar(
+        title: Text('Pochi'),
+        centerTitle: true,
+        backgroundColor: Color.fromARGB(250, 231, 117, 78),
+      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -26,7 +33,7 @@ class StartPageState extends State<StartPage> {
                   context,
                 ).push(MaterialPageRoute(builder: (context) => RouteCreate()));
               },
-              child: const Text('始める'),
+              child: const Text('Start'),
             ),
             ElevatedButton(
               onPressed: () {
@@ -39,7 +46,7 @@ class StartPageState extends State<StartPage> {
                   ),
                 );
               },
-              child: const Text('Achievement')
+              child: const Text('Achievements'),
             ),
           ],
         ),
