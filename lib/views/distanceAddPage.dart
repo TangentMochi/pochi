@@ -60,6 +60,7 @@ class DistanceAddPageState extends State<DistanceAddPage> {
           ],
         ),
       ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.startDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.push(

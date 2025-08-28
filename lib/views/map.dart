@@ -17,7 +17,6 @@ class MyMap extends StatefulWidget {
 
 class _MyMapState extends State<MyMap> {
   late GoogleMapController _mapController;
-  //late int _distance;
   Position? _currentPosition;
   late StreamSubscription<Position> _positionStream;
 
@@ -46,12 +45,6 @@ class _MyMapState extends State<MyMap> {
     super.dispose();
   }
 
-  // void _updateDistance(){
-  //   setState(() {
-  //     _distance = MyMap.distance;
-  //   });
-  // }
-
   void myLocationButton() {
     _mapController.moveCamera(
       CameraUpdate.newCameraPosition(
@@ -71,34 +64,68 @@ class _MyMapState extends State<MyMap> {
       return Center(child: CircularProgressIndicator());
     }
     return Scaffold(
-      // appBar: AppBar(title: Text(widget.distance.toString())),
       appBar: AppBar(title: Text('${widget.distance}')),
-      body: GoogleMap(
-        mapType: MapType.normal,
-        onMapCreated: (controller) {
-          _mapController = controller;
-        },
-        initialCameraPosition: CameraPosition(
-          target: LatLng(
-            _currentPosition!.latitude,
-            _currentPosition!.longitude,
-          ),
-          zoom: 10,
-        ),
-        myLocationEnabled: true,
-        myLocationButtonEnabled: false,
-        compassEnabled: true,
+      body: Stack(
+        children: [
+          GoogleMap(
+            mapType: MapType.normal,
+            onMapCreated: (controller) {
+              _mapController = controller;
+            },
+            initialCameraPosition: CameraPosition(
+              target: LatLng(
+                _currentPosition!.latitude,
+                _currentPosition!.longitude,
+              ),
+              zoom: 10,
+            ),
+            myLocationEnabled: true,
+            myLocationButtonEnabled: false,
+            compassEnabled: true,
 
-        markers: {
-          Marker(
-            markerId: MarkerId('currentLocation'),
-            position: LatLng(37.7749, -122.4194),
+            markers: {
+              Marker(
+                markerId: MarkerId('currentLocation'),
+                position: LatLng(37.7749, -122.4194),
+              ),
+            },
           ),
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: myLocationButton,
-        child: Icon(Icons.my_location),
+          Positioned(
+            top: 10,
+            right: 10,
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.white70,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text('現在の距離 km'), // 変数を表示
+            ),
+          ),
+          Positioned(
+            bottom: 40,
+            left: 10,
+            child: Container(
+              padding: const EdgeInsets.all(8.0),
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.white70,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Text('今までに歩いた距離 km'), // 変数を表示
+            ),
+          ),
+
+          Positioned(
+            bottom: 50,
+            right: 20,
+            child: FloatingActionButton(
+              onPressed: myLocationButton,
+              child: Icon(Icons.my_location),
+            ),
+          ),
+        ],
       ),
     );
   }

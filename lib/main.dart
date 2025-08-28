@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pochi/import.dart';
-import 'dart:async';
 
 void main() {
   runApp(const MyApp());
