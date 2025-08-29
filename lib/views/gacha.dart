@@ -1,11 +1,9 @@
 
+import 'dart:convert';
+
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(MaterialApp(home: GachaView()));
-}
+import 'package:http/http.dart' as http;
 
 class GachaView extends StatefulWidget {
   const GachaView({super.key});
@@ -16,6 +14,7 @@ class GachaView extends StatefulWidget {
 
 class GachaState extends State<GachaView> {
   late ConfettiController _confettiController;
+  String? _imageUrl = null;
 
   @override
   void initState() {
@@ -23,9 +22,16 @@ class GachaState extends State<GachaView> {
     _confettiController = ConfettiController(
       duration: const Duration(seconds: 5),
     );
+
     WidgetsBinding.instance!.addPostFrameCallback(
             (_) => _showAlert()
     );
+  }
+
+  @override
+  void dispose() {
+    _confettiController.dispose();
+    super.dispose();
   }
 
   Future<void> _showAlert() async {
@@ -49,6 +55,21 @@ class GachaState extends State<GachaView> {
     );
   }
 
+  Future<void> _fetchGacha() async {
+    setState(() {
+      _imageUrl = null;
+    });
+    var uri = Uri.parse('https://dog.ceo/api/breeds/image/random');
+    var response = await http.get(uri);
+    if (response.statusCode == 200) {
+      var body = jsonDecode(response.body);
+      _confettiController.play();
+      setState(() {
+        _imageUrl = body.containsKey('message') ? body['message'] : null;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,7 +79,7 @@ class GachaState extends State<GachaView> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             ConfettiWidget(
               confettiController: _confettiController,
               blastDirection: -3.14 / 2,
@@ -73,7 +94,42 @@ class GachaState extends State<GachaView> {
                 Colors.purple,
               ],
             ),
-            ElevatedButton(onPressed: () {}, child: const Text('ガチャを回す'))
+            _imageUrl != null ? Container(
+              width: 300,
+              height: 250,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                border: Border.all(
+                  color: Color.fromARGB(255, 199, 152, 110),
+                  width: 5,
+                ),
+              ),
+              child: ClipRRect(
+                child: Image.network(
+                  _imageUrl!,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ) : Container(
+              color: Colors.grey,
+              child: SizedBox(
+                width: 300,
+                height: 250,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                )
+              ),
+            ),
+            SizedBox(
+              width: 300,
+              height: 25,
+            ),
+            ElevatedButton(
+                onPressed: () {
+                  _fetchGacha();
+                },
+                child: const Text('ガチャを回す')
+            ),
           ],
         ),
       ),

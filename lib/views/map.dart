@@ -161,9 +161,20 @@ class _MyMapState extends State<MyMap> {
         actions: [
           IconButton(
             icon: const Icon(Icons.stop),
-            tooltip: 'Show Snackbar',
+            tooltip: 'Stop おさんぽ',
             onPressed: () {
               resultPage();
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.pets),
+            tooltip: '犬ガチャ',
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => GachaView(),
+                ),
+              );
             },
           ),
         ],
