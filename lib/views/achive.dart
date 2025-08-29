@@ -1,6 +1,7 @@
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:confetti/confetti.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class Achivement extends StatelessWidget {
   const Achivement({super.key});
@@ -9,13 +10,13 @@ class Achivement extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'My Achive',
-      home: const MyAchive(title: 'My Achive'),
+      home: MyAchive(title: 'My Achive'),
     );
   }
 }
 
 class MyAchive extends StatefulWidget {
-  const MyAchive({super.key, required this.title});
+  MyAchive({super.key, required this.title});
 
   final String title;
   @override
@@ -25,7 +26,10 @@ class MyAchive extends StatefulWidget {
 class _MyAchiveState extends State<MyAchive> {
   late ConfettiController _confettiController;
 
+  final _audio = AudioPlayer();
   void BackPage() {
+    _audio.play(AssetSource("mouse.mp3"));
+
     Navigator.pop(context);
   }
 

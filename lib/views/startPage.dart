@@ -21,7 +21,7 @@ class StartPageState extends State<StartPage> {
     _audio.dispose();
     super.dispose();
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,12 +42,12 @@ class StartPageState extends State<StartPage> {
             ),
             ElevatedButton(
               onPressed: () {
+                _audio.play(AssetSource("mouse.mp3"));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const MyAchive(
-                      title: 'My Achievements',
-                    ), // Corrected line
+                    builder: (context) =>
+                        MyAchive(title: 'My Achievements'), // Corrected line
                   ),
                 );
               },

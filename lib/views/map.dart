@@ -6,6 +6,7 @@ import 'package:pochi/import.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class MyMap extends StatefulWidget {
   final ResultRoute route;
@@ -20,6 +21,7 @@ class _MyMapState extends State<MyMap> {
   late GoogleMapController _mapController;
   Position? _currentPosition;
   late StreamSubscription<Position> _positionStream;
+  final _audio = AudioPlayer();
 
   double currentDistance = 0; // 2地点での距離
   double currentSum = 0; // 現在歩いた距離
@@ -81,6 +83,7 @@ class _MyMapState extends State<MyMap> {
   }
 
   void myLocationButton() {
+    _audio.play(AssetSource('cute_button.mp3'));
     _mapController.animateCamera(
       CameraUpdate.newLatLng(
         LatLng(_currentPosition!.latitude, _currentPosition!.longitude),
@@ -120,6 +123,7 @@ class _MyMapState extends State<MyMap> {
   }
 
   void resultPage() {
+    _audio.play(AssetSource('cute_button.mp3'));
     saveTotalDistance();
     Navigator.of(context).push(
       MaterialPageRoute(
