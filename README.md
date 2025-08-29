@@ -8,7 +8,7 @@ Let's おさんぽ
 `.env`ファイルが必要です。
 
 ```
-flavor
-androidGoogleMapApiKey
-iOSGoogleMapApiKey
+flavor="dev"
+androidGoogleMapApiKey=""
+iOSGoogleMapApiKey=""
 ```
