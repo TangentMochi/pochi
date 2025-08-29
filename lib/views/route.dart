@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:pochi/import.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class RouteCreate extends StatefulWidget {
   @override
@@ -138,7 +139,10 @@ class _RouteCreateState extends State<RouteCreate> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pochi'),
+        title: Text(
+          'Pochi',
+          style: GoogleFonts.alfaSlabOne(textStyle: TextStyle(fontSize: 30)),
+        ),
         //backgroundColor: Color.fromARGB(250, 231, 117, 78),
       ),
       body: BottomSheetBar(
@@ -169,7 +173,14 @@ class _RouteCreateState extends State<RouteCreate> {
               controller: scrollController,
               shrinkWrap: true,
               slivers: [
-                SliverAppBar(title: const Text('追加された経路')),
+                SliverAppBar(
+                  title: Text(
+                    'ついかされたポイント',
+                    style: GoogleFonts.kiwiMaru(
+                      textStyle: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                ),
                 SliverFixedExtentList(
                   itemExtent: 128,
                   delegate: SliverChildBuilderDelegate((context, index) {
@@ -188,7 +199,12 @@ class _RouteCreateState extends State<RouteCreate> {
                   child: Align(
                     alignment: Alignment.bottomCenter,
                     child: Padding(
-                      padding: const EdgeInsets.all(16.0),
+                      padding: const EdgeInsets.only(
+                        left: 15,
+                        right: 15,
+                        bottom: 70,
+                      ),
+
                       child: ElevatedButton(
                         onPressed: () async {
                           _audio.play(AssetSource('cute_button.mp3'));
@@ -206,7 +222,6 @@ class _RouteCreateState extends State<RouteCreate> {
                               _currentPosition!.longitude,
                             ),
                           );
-                          // TODO: ここで遷移させる。
 
                           Navigator.push(
                             context,
@@ -215,7 +230,12 @@ class _RouteCreateState extends State<RouteCreate> {
                             ),
                           );
                         },
-                        child: const Text('この経路でルートを生成する'),
+                        child: Text(
+                          'この経路でルートを生成する',
+                          style: GoogleFonts.kiwiMaru(
+                            textStyle: TextStyle(fontSize: 20),
+                          ),
+                        ),
                       ),
                     ),
                   ),
@@ -279,16 +299,25 @@ class RouteSpotView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('場所詳細')),
+      appBar: AppBar(
+        title: Text(
+          '場所詳細',
+          style: GoogleFonts.kiwiMaru(textStyle: TextStyle(fontSize: 25)),
+        ),
+      ),
       body: Center(
         child: Column(
           children: [
+            SizedBox(height: 20),
             Text(_spot.toString()),
             ElevatedButton(
               onPressed: () {
                 _popRouteSpot(context);
               },
-              child: const Text('このポイントを経路に追加'),
+              child: Text(
+                'このポイントを経路に追加',
+                style: GoogleFonts.kiwiMaru(textStyle: TextStyle(fontSize: 20)),
+              ),
             ),
           ],
         ),

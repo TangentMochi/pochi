@@ -20,9 +20,10 @@ class MyMap extends StatefulWidget {
 class _MyMapState extends State<MyMap> {
   late GoogleMapController _mapController;
   Position? _currentPosition;
+  Position? _firstPosition;
   late StreamSubscription<Position> _positionStream;
   final _audio = AudioPlayer();
-  late Timer timer;
+  late Timer _timer;
 
   int currentDistance = 0; // 2地点での距離
   int currentSum = 0; // 現在歩いた距離
@@ -37,6 +38,7 @@ class _MyMapState extends State<MyMap> {
       getPosition().then((position) {
         setState(() {
           _currentPosition = position;
+          _firstPosition = position;
         });
       });
       getSetting().then((setting) {
@@ -55,6 +57,10 @@ class _MyMapState extends State<MyMap> {
     setState(() {
       _currentPosition = position;
     });
+
+    if (widget.route.distance - currentSum < 100 && await getDistance(_firstPosition, position) < 100) {
+      resultPage();
+    }
 
     _mapController.animateCamera(
       CameraUpdate.newLatLng(
@@ -78,9 +84,9 @@ class _MyMapState extends State<MyMap> {
 
   @override
   void dispose() {
+    _timer.cancel();
     _mapController.dispose();
     _positionStream.cancel();
-    timer.cancel();
     super.dispose();
   }
 
@@ -99,8 +105,8 @@ class _MyMapState extends State<MyMap> {
 
     startLocation = _currentPosition;
 
-    Timer.periodic(Duration(seconds: 2), (timer) async {
-      lastLocation = await _currentPosition;
+    _timer = Timer.periodic(Duration(seconds: 2), (timer) async {
+      lastLocation = _currentPosition;
       debugPrint('lastLocation, $lastLocation');
 
       double temp = await getDistance(startLocation, lastLocation);
@@ -148,7 +154,10 @@ class _MyMapState extends State<MyMap> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pochi'),
+        title: Text(
+          'Pochi',
+          style: GoogleFonts.alfaSlabOne(textStyle: TextStyle(fontSize: 30)),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.stop),
