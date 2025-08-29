@@ -14,7 +14,7 @@ class GachaView extends StatefulWidget {
 
 class GachaState extends State<GachaView> {
   late ConfettiController _confettiController;
-  String? _imageUrl = null;
+  String? _imageUrl = "https://images.dog.ceo/breeds/frise-bichon/4.jpg";
 
   @override
   void initState() {
