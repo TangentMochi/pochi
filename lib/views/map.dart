@@ -158,6 +158,7 @@ class _MyMapState extends State<MyMap> {
           'Pochi',
           style: GoogleFonts.alfaSlabOne(textStyle: TextStyle(fontSize: 30)),
         ),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.stop),

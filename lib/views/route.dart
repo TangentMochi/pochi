@@ -143,7 +143,7 @@ class _RouteCreateState extends State<RouteCreate> {
           'Pochi',
           style: GoogleFonts.alfaSlabOne(textStyle: TextStyle(fontSize: 30)),
         ),
-        //backgroundColor: Color.fromARGB(250, 231, 117, 78),
+        centerTitle: true,
       ),
       body: BottomSheetBar(
         willPopScope: true,
@@ -175,7 +175,7 @@ class _RouteCreateState extends State<RouteCreate> {
               slivers: [
                 SliverAppBar(
                   title: Text(
-                    'ついかされたポイント',
+                    '追加されたポイント',
                     style: GoogleFonts.kiwiMaru(
                       textStyle: TextStyle(fontSize: 20),
                     ),
@@ -308,8 +308,13 @@ class RouteSpotView extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            SizedBox(height: 20),
-            Text(_spot.toString()),
+            SizedBox(height: 40),
+            Text(
+              _spot.toString(),
+              style: GoogleFonts.kiwiMaru(textStyle: TextStyle(fontSize: 20)),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(height: 40),
             ElevatedButton(
               onPressed: () {
                 _popRouteSpot(context);
