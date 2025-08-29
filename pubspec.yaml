@@ -40,6 +40,5 @@ flutter:
     - .env
     - assets/
     - assets/1.mp3
-    - assets/mouse.mp3
     - assets/clap.mp3
     - assets/cute_button.mp3
