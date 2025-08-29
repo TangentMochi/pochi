@@ -36,7 +36,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-assets:
-  - .env
-  - audio/ 
+  assets:
+    - .env
+    - assets/
+    - assets/1.mp3

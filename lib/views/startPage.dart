@@ -16,6 +16,13 @@ class StartPage extends StatefulWidget {
 class StartPageState extends State<StartPage> {
   final _audio = AudioPlayer();
 
+  @override
+  void dispose() {
+    _audio.dispose();
+    super.dispose();
+  }
+  
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -29,6 +36,8 @@ class StartPageState extends State<StartPage> {
           children: <Widget>[
             ElevatedButton(
               onPressed: () {
+                print('hi');
+                _audio.play(AssetSource("1.mp3"));
                 Navigator.of(
                   context,
                 ).push(MaterialPageRoute(builder: (context) => RouteCreate()));
