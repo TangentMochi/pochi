@@ -40,3 +40,4 @@ flutter:
     - .env
     - assets/
     - assets/1.mp3
+    - assets/cute_button.mp3

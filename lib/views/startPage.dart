@@ -42,7 +42,7 @@ class StartPageState extends State<StartPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                _audio.play(AssetSource("mouse.mp3"));
+                _audio.play(AssetSource("cute_button.mp3"));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
