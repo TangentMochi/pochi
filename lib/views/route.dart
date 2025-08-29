@@ -139,7 +139,7 @@ class _RouteCreateState extends State<RouteCreate> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Pochi'),
-        backgroundColor: Color.fromARGB(250, 231, 117, 78),
+        //backgroundColor: Color.fromARGB(250, 231, 117, 78),
       ),
       body: BottomSheetBar(
         willPopScope: true,

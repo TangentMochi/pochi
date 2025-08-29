@@ -25,11 +25,7 @@ class StartPageState extends State<StartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Pochi'),
-        centerTitle: true,
-        backgroundColor: Color.fromARGB(250, 231, 117, 78),
-      ),
+      appBar: AppBar(title: Text('Pochi'), centerTitle: true),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
