@@ -6,7 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:audioplayers/audioplayers.dart';
 
 class ResultPageApp extends StatelessWidget {
-  final double distanceValue;
+  final int distanceValue;
   const ResultPageApp({super.key, required this.distanceValue});
 
   @override
@@ -32,7 +32,7 @@ class ResultPage extends StatefulWidget {
   });
 
   final String title;
-  final double distanceValue;
+  final int distanceValue;
 
   @override
   State<ResultPage> createState() => _ResultPageState();
@@ -162,7 +162,7 @@ class _ResultPageState extends State<ResultPage>
                   const SizedBox(height: 25),
                   _buildRainbowShader(
                     Text(
-                      "今回の記録${widget.distanceValue.toInt()} m",
+                      "今回の記録${widget.distanceValue} m",
                       style: const TextStyle(
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,
