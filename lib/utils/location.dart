@@ -20,16 +20,18 @@ Future<void> requestLocationPermission() async {
   }
 
   if (permission == LocationPermission.deniedForever) {
-    return Future.error('Location permissions are permanently denied, we cannot request permissions.');
+    return Future.error(
+      'Location permissions are permanently denied, we cannot request permissions.',
+    );
   }
 }
 
 Future<bool> isPreciseLocation() async {
   final status = await Geolocator.getLocationAccuracy();
   switch (status) {
-    case LocationAccuracyStatus.reduced :
+    case LocationAccuracyStatus.reduced:
       return false;
-    case LocationAccuracyStatus.precise :
+    case LocationAccuracyStatus.precise:
       return true;
     default:
       return false;
@@ -60,7 +62,9 @@ Future<double> getDistance(
 
 Future<Position> getPosition() async {
   final setting = LocationSettings(
-    accuracy: await isPreciseLocation() ? LocationAccuracy.bestForNavigation : LocationAccuracy.low
+    accuracy: await isPreciseLocation()
+        ? LocationAccuracy.bestForNavigation
+        : LocationAccuracy.low,
   );
 
   return Geolocator.getCurrentPosition(locationSettings: setting);

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_config/flutter_config.dart';
 import 'package:pochi/import.dart';
-import 'dart:async';
+import 'package:pochi/views/startPage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,10 +19,17 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: title,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        appBarTheme: AppBarTheme(
+          backgroundColor: Color.fromARGB(255, 197, 149, 105),
+        ),
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Color.fromARGB(255, 149, 60, 46),
+          primary: Colors.black,
+          surface: Color.fromARGB(255, 251, 230, 203),
+        ),
         useMaterial3: true,
       ),
-      home: RouteCreate(),
+      home: StartPage(),
     );
   }
 }
