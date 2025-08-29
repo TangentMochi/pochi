@@ -133,8 +133,6 @@ class _MyMapState extends State<MyMap> {
   void resultPage() {
     _audio.play(AssetSource('cute_button.mp3'));
     saveTotalDistance();
-    dispose();
-
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (context) =>
