@@ -65,7 +65,8 @@ class _MyAchiveState extends State<MyAchive> {
       appBar: AppBar(
         title: Text(
           widget.title,
-          style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 20)),
+
+          style: GoogleFonts.alfaSlabOne(textStyle: TextStyle(fontSize: 30)),
         ),
       ),
       body: Center(

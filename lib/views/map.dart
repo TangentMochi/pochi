@@ -148,7 +148,10 @@ class _MyMapState extends State<MyMap> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text('Pochi'),
+        title: Text(
+          'Pochi',
+          style: GoogleFonts.alfaSlabOne(textStyle: TextStyle(fontSize: 30)),
+        ),
         actions: [
           IconButton(
             icon: const Icon(Icons.stop),

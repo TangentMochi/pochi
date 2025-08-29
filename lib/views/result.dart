@@ -13,12 +13,6 @@ class ResultPageApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Result',
-
-      // theme: ThemeData(
-      //   colorScheme: ColorScheme.fromSeed(
-      //     seedColor: const Color.fromARGB(255, 110, 213, 132),
-      //   ),
-      // ),
       home: ResultPage(title: 'Result', distanceValue: distanceValue),
     );
   }
@@ -112,7 +106,12 @@ class _ResultPageState extends State<ResultPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: Text(
+          widget.title,
+          style: GoogleFonts.alfaSlabOne(textStyle: TextStyle(fontSize: 30)),
+        ),
+      ),
       body: Center(
         child: AnimatedBuilder(
           animation: _animation,
@@ -224,6 +223,7 @@ class _ResultPageState extends State<ResultPage>
         onPressed: _resultBackPage,
         tooltip: 'Increment',
         child: const Icon(Icons.house),
+        backgroundColor: Color.fromARGB(255, 197, 149, 105),
       ),
     );
   }
