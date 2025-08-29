@@ -6,3 +6,9 @@ Let's おさんぽ
 
 ## Build
 `.env`ファイルが必要です。
+
+```
+flavor
+androidGoogleMapApiKey
+iOSGoogleMapApiKey
+```
