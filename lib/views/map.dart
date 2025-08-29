@@ -58,7 +58,7 @@ class _MyMapState extends State<MyMap> {
       _currentPosition = position;
     });
 
-    if (widget.route.distance - currentSum < 100 && await getDistance(_firstPosition, position) < 100) {
+    if (widget.route.distance - currentSum < 50 && await getDistance(_firstPosition, position) < 25) {
       resultPage();
     }
 
