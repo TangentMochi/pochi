@@ -57,6 +57,7 @@ class _ResultPageState extends State<ResultPage>
   final _audio = AudioPlayer();
   @override
   void initState() {
+    _audio.play(AssetSource('clap.mp3'));
     super.initState();
     // 画面が初期化された時にデータを読み込む
     loadTotalDistance();
