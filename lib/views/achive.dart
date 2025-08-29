@@ -2,6 +2,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:confetti/confetti.dart';
 import 'package:audioplayers/audioplayers.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Achivement extends StatelessWidget {
   const Achivement({super.key});
@@ -25,6 +26,7 @@ class MyAchive extends StatefulWidget {
 
 class _MyAchiveState extends State<MyAchive> {
   late ConfettiController _confettiController;
+  double sum = 0;
 
   final _audio = AudioPlayer();
   void BackPage() {
@@ -33,7 +35,13 @@ class _MyAchiveState extends State<MyAchive> {
     Navigator.pop(context);
   }
 
-  double sum = 60;
+  void loadTotalDistance() async {
+    final prefs = await SharedPreferences.getInstance();
+    sum = prefs.getDouble('totalDistance') ?? 0; // キーから値を取得、なければ0
+    setState(() {
+      sum = prefs.getDouble('totalDistance') ?? 0; // キーから値を取得、なければ0
+    });
+  }
 
   @override
   void initState() {
@@ -42,6 +50,7 @@ class _MyAchiveState extends State<MyAchive> {
       duration: const Duration(seconds: 5),
     );
     _confettiController.play();
+    loadTotalDistance();
   }
 
   @override
@@ -54,7 +63,6 @@ class _MyAchiveState extends State<MyAchive> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        // backgroundColor: Color.fromARGB(250, 231, 117, 78),
         title: Text(
           widget.title,
           style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 20)),
@@ -78,7 +86,7 @@ class _MyAchiveState extends State<MyAchive> {
                 Colors.purple,
               ],
             ),
-            (sum >= 10)
+            (sum >= 100)
                 ? Container(
                     width: 200,
                     height: 150,
@@ -104,12 +112,12 @@ class _MyAchiveState extends State<MyAchive> {
 
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text("10kmで表示")],
+                        children: [Text("100mで表示")],
                       ),
                     ),
                   ),
             SizedBox(height: 25),
-            (sum >= 20)
+            (sum >= 200)
                 ? Container(
                     width: 200,
                     height: 150,
@@ -134,12 +142,12 @@ class _MyAchiveState extends State<MyAchive> {
 
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text("10kmで表示")],
+                        children: [Text("200mで表示")],
                       ),
                     ),
                   ),
             SizedBox(height: 25),
-            (sum >= 30)
+            (sum >= 30000)
                 ? Container(
                     width: 200,
                     height: 150,
@@ -165,12 +173,12 @@ class _MyAchiveState extends State<MyAchive> {
 
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text("10kmで表示")],
+                        children: [Text("30kmで表示")],
                       ),
                     ),
                   ),
             SizedBox(height: 25),
-            (sum >= 40)
+            (sum >= 40000)
                 ? Container(
                     width: 200,
                     height: 150,
@@ -196,7 +204,7 @@ class _MyAchiveState extends State<MyAchive> {
 
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [Text("10kmで表示")],
+                        children: [Text("40kmで表示")],
                       ),
                     ),
                   ),

@@ -99,7 +99,7 @@ class _MyMapState extends State<MyMap> {
 
     startLocation = _currentPosition;
 
-    timer = Timer.periodic(Duration(seconds: 5), (timer) async {
+    Timer.periodic(Duration(seconds: 2), (timer) async {
       lastLocation = await _currentPosition;
       debugPrint('lastLocation, $lastLocation');
 
