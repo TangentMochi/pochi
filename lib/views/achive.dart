@@ -97,6 +97,7 @@ class _MyAchiveState extends State<MyAchive> {
                     ),
                   )
                 : Container(
+                    color: Colors.grey,
                     child: SizedBox(
                       width: 250,
                       height: 150,
@@ -126,6 +127,7 @@ class _MyAchiveState extends State<MyAchive> {
                     ),
                   )
                 : Container(
+                    color: Colors.grey,
                     child: SizedBox(
                       width: 250,
                       height: 150,

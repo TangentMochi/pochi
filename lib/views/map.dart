@@ -22,6 +22,7 @@ class _MyMapState extends State<MyMap> {
   Position? _currentPosition;
   late StreamSubscription<Position> _positionStream;
   final _audio = AudioPlayer();
+  late Timer timer;
 
   int currentDistance = 0; // 2地点での距離
   int currentSum = 0; // 現在歩いた距離
@@ -79,6 +80,7 @@ class _MyMapState extends State<MyMap> {
   void dispose() {
     _mapController.dispose();
     _positionStream.cancel();
+    timer.cancel();
     super.dispose();
   }
 
@@ -97,7 +99,7 @@ class _MyMapState extends State<MyMap> {
 
     startLocation = _currentPosition;
 
-    Timer.periodic(Duration(seconds: 5), (timer) async {
+    timer = Timer.periodic(Duration(seconds: 5), (timer) async {
       lastLocation = await _currentPosition;
       debugPrint('lastLocation, $lastLocation');
 
@@ -109,11 +111,11 @@ class _MyMapState extends State<MyMap> {
         startLocation = lastLocation;
       });
       restDistance();
-      culculateTotalDistance();
+      calculateTotalDistance();
     });
   }
 
-  void culculateTotalDistance() async {
+  void calculateTotalDistance() async {
     double updateTotalDistance = await updateAndSaveTotalDistance(
       currentDistance.toDouble(),
     );
