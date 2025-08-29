@@ -19,7 +19,6 @@ class _RouteCreateState extends State<RouteCreate> {
   late GoogleMapController _mapController;
 
   Position? _currentPosition;
-  late StreamSubscription<Position> _positionStream;
   List<RouteSpot> _viewSpots = List.empty(growable: true);
   Route _route = Route();
 
@@ -47,7 +46,6 @@ class _RouteCreateState extends State<RouteCreate> {
   void dispose() {
     _bsbController.removeListener(_onBsbChanged);
     _bsbController.dispose();
-    _positionStream.cancel();
     super.dispose();
   }
 
@@ -141,7 +139,7 @@ class _RouteCreateState extends State<RouteCreate> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Pochi'),
-        backgroundColor: Color.fromARGB(250, 231, 117, 78),
+        //backgroundColor: Color.fromARGB(250, 231, 117, 78),
       ),
       body: BottomSheetBar(
         willPopScope: true,

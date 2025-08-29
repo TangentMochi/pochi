@@ -54,7 +54,7 @@ class _MyAchiveState extends State<MyAchive> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromARGB(250, 231, 117, 78),
+        // backgroundColor: Color.fromARGB(250, 231, 117, 78),
         title: Text(
           widget.title,
           style: GoogleFonts.roboto(textStyle: TextStyle(fontSize: 20)),

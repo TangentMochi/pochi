@@ -26,6 +26,7 @@ class _MyMapState extends State<MyMap> {
   double currentDistance = 0; // 2地点での距離
   double currentSum = 0; // 現在歩いた距離
   double totalDistance = 0; // 今までに歩いた距離
+  int rest = 0; // 残りの距離
 
   @override
   void initState() {
@@ -132,16 +133,19 @@ class _MyMapState extends State<MyMap> {
     );
   }
 
+  void restDistance() {
+    setState(() {
+      rest = widget.route.distance - currentSum.toInt();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     if (_currentPosition == null) {
       return Center(child: CircularProgressIndicator());
     }
     return Scaffold(
-      appBar: AppBar(
-        title: Text('${widget.route.distance}'),
-        backgroundColor: Color.fromARGB(250, 231, 117, 78),
-      ),
+      appBar: AppBar(title: Text('Pochi')),
       body: Stack(
         children: [
           GoogleMap(
@@ -154,7 +158,7 @@ class _MyMapState extends State<MyMap> {
                 _currentPosition!.latitude,
                 _currentPosition!.longitude,
               ),
-              zoom: 10,
+              zoom: 18,
             ),
             myLocationEnabled: true,
             myLocationButtonEnabled: false,
@@ -182,7 +186,12 @@ class _MyMapState extends State<MyMap> {
                 color: Colors.white70,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text('現在の距離 ${currentSum.toStringAsFixed(3)}'), // 変数を表示
+              child: Column(
+                children: [
+                  Text('現在の距離 ${currentSum.toInt()}'), // 変数を表示
+                  Text('残り ${rest.toString()}'),
+                ],
+              ),
             ),
           ),
           Positioned(
@@ -195,9 +204,7 @@ class _MyMapState extends State<MyMap> {
                 color: Colors.white70,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text(
-                '今までに歩いた距離 ${totalDistance.toStringAsFixed(3)}',
-              ), // 変数を表示
+              child: Text('今までに歩いた距離 ${totalDistance.toInt()}'), // 変数を表示
             ),
           ),
 

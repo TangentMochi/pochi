@@ -111,10 +111,7 @@ class _ResultPageState extends State<ResultPage>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(250, 231, 117, 78),
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Center(
         child: AnimatedBuilder(
           animation: _animation,
@@ -165,7 +162,7 @@ class _ResultPageState extends State<ResultPage>
                   const SizedBox(height: 25),
                   _buildRainbowShader(
                     Text(
-                      "今回の記録${widget.distanceValue.toStringAsFixed(3)} m",
+                      "今回の記録${widget.distanceValue.toInt()} m",
                       style: const TextStyle(
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,
@@ -175,7 +172,7 @@ class _ResultPageState extends State<ResultPage>
                   ),
                   _buildRainbowShader(
                     Text(
-                      "これまで走った距離${allDistanceValue.toStringAsFixed(3)} m",
+                      "これまで走った距離${allDistanceValue.toInt()} m",
                       style: const TextStyle(
                         fontSize: 25.0,
                         fontWeight: FontWeight.bold,
