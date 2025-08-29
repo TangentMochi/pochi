@@ -58,7 +58,7 @@ class _MyMapState extends State<MyMap> {
       _currentPosition = position;
     });
 
-    if (widget.route.distance - currentSum < 100 && await getDistance(_firstPosition, position) < 100) {
+    if (widget.route.distance - currentSum < 50 && await getDistance(_firstPosition, position) < 25) {
       resultPage();
     }
 
@@ -162,9 +162,20 @@ class _MyMapState extends State<MyMap> {
         actions: [
           IconButton(
             icon: const Icon(Icons.stop),
-            tooltip: 'Show Snackbar',
+            tooltip: 'Stop おさんぽ',
             onPressed: () {
               resultPage();
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.pets),
+            tooltip: '犬ガチャ',
+            onPressed: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => GachaView(),
+                ),
+              );
             },
           ),
         ],
