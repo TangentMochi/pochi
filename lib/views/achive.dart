@@ -64,14 +64,20 @@ class _MyAchiveState extends State<MyAchive> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.title,
-
+          'Pochi',
           style: GoogleFonts.alfaSlabOne(textStyle: TextStyle(fontSize: 30)),
         ),
       ),
       body: Center(
         child: Column(
           children: <Widget>[
+            SizedBox(height: 30),
+            Text(
+              'My Achivements',
+              style: GoogleFonts.dmSerifDisplay(
+                textStyle: TextStyle(fontSize: 40),
+              ),
+            ),
             SizedBox(height: 25),
             ConfettiWidget(
               confettiController: _confettiController,
@@ -217,6 +223,7 @@ class _MyAchiveState extends State<MyAchive> {
         onPressed: BackPage,
         tooltip: 'Increment',
         child: const Icon(Icons.house),
+        backgroundColor: Color.fromARGB(255, 197, 149, 105),
       ),
     );
   }

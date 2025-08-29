@@ -108,9 +108,10 @@ class _ResultPageState extends State<ResultPage>
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          widget.title,
+          'Pochi',
           style: GoogleFonts.alfaSlabOne(textStyle: TextStyle(fontSize: 30)),
         ),
+        centerTitle: true,
       ),
       body: Center(
         child: AnimatedBuilder(
@@ -121,6 +122,13 @@ class _ResultPageState extends State<ResultPage>
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  // Align(
+                  //   alignment: Alignment.topCenter,
+                  //   child: Text(
+                  //     'result',
+                  //     style: GoogleFonts.saira(fontSize: 30),
+                  //   ),
+                  // ),
                   _buildRainbowShader(
                     Text(
                       'Congratulation!!',
