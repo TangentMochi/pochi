@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pochi/views/startPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class ResultPageApp extends StatelessWidget {
   final double distanceValue;
@@ -53,7 +54,7 @@ class _ResultPageState extends State<ResultPage>
 
   late AnimationController _controller;
   late Animation<double> _animation;
-
+  final _audio = AudioPlayer();
   @override
   void initState() {
     super.initState();
@@ -77,6 +78,7 @@ class _ResultPageState extends State<ResultPage>
   }
 
   void _resultBackPage() {
+    _audio.play(AssetSource('cute_button.mp3'));
     setState(() {
       Navigator.popUntil(context, (route) {
         return route.isFirst;
