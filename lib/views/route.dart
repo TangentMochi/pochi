@@ -18,7 +18,6 @@ class _RouteCreateState extends State<RouteCreate> {
   late GoogleMapController _mapController;
 
   Position? _currentPosition;
-  late StreamSubscription<Position> _positionStream;
   List<RouteSpot> _viewSpots = List.empty(growable: true);
   Route _route = Route();
 
@@ -45,7 +44,6 @@ class _RouteCreateState extends State<RouteCreate> {
   void dispose() {
     _bsbController.removeListener(_onBsbChanged);
     _bsbController.dispose();
-    _positionStream.cancel();
     super.dispose();
   }
 

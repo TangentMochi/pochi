@@ -154,7 +154,7 @@ class _MyMapState extends State<MyMap> {
                 _currentPosition!.latitude,
                 _currentPosition!.longitude,
               ),
-              zoom: 10,
+              zoom: 18,
             ),
             myLocationEnabled: true,
             myLocationButtonEnabled: false,
