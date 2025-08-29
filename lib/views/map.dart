@@ -141,7 +141,18 @@ class _MyMapState extends State<MyMap> {
       return Center(child: CircularProgressIndicator());
     }
     return Scaffold(
-      appBar: AppBar(title: Text('Pochi')),
+      appBar: AppBar(
+        title: Text('Pochi'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.stop),
+            tooltip: 'Show Snackbar',
+            onPressed: () {
+              resultPage();
+            },
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           GoogleMap(
@@ -212,17 +223,6 @@ class _MyMapState extends State<MyMap> {
               onPressed: myLocationButton,
               child: Icon(Icons.my_location),
               heroTag: 'location',
-            ),
-          ),
-          SizedBox(height: 20),
-          Positioned(
-            // リザルト画面へ移動（消す）
-            top: 30,
-            left: 30,
-            child: FloatingActionButton(
-              onPressed: resultPage,
-              child: Icon(Icons.stop),
-              heroTag: 'stop',
             ),
           ),
         ],
