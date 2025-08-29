@@ -23,8 +23,8 @@ class _MyMapState extends State<MyMap> {
   late StreamSubscription<Position> _positionStream;
   final _audio = AudioPlayer();
 
-  double currentDistance = 0; // 2地点での距離
-  double currentSum = 0; // 現在歩いた距離
+  int currentDistance = 0; // 2地点での距離
+  int currentSum = 0; // 現在歩いた距離
   double totalDistance = 0; // 今までに歩いた距離
   int rest = 0; // 残りの距離
 
@@ -104,19 +104,19 @@ class _MyMapState extends State<MyMap> {
       double temp = await getDistance(startLocation, lastLocation);
 
       setState(() {
-        currentDistance = temp;
+        currentDistance = temp.toInt();
         currentSum += currentDistance;
         startLocation = lastLocation;
       });
+      restDistance();
       culculateTotalDistance();
     });
   }
 
   void culculateTotalDistance() async {
     double updateTotalDistance = await updateAndSaveTotalDistance(
-      currentDistance,
+      currentDistance.toDouble(),
     );
-
     setState(() {
       totalDistance = updateTotalDistance;
     });
@@ -199,8 +199,8 @@ class _MyMapState extends State<MyMap> {
               ),
               child: Column(
                 children: [
-                  Text('現在の距離 ${currentSum.toInt()}'), // 変数を表示
-                  Text('残り ${rest.toString()}'),
+                  Text('現在の距離 ${currentSum.toInt()}m'), // 変数を表示
+                  Text('残り ${rest}m'),
                 ],
               ),
             ),
@@ -215,7 +215,7 @@ class _MyMapState extends State<MyMap> {
                 color: Colors.white70,
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Text('今までに歩いた距離 ${totalDistance.toInt()}'), // 変数を表示
+              child: Text('今までに歩いた距離 ${totalDistance.toInt()}m'), // 変数を表示
             ),
           ),
 
