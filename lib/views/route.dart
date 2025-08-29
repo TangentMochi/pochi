@@ -191,7 +191,7 @@ class _RouteCreateState extends State<RouteCreate> {
                       padding: const EdgeInsets.all(16.0),
                       child: ElevatedButton(
                         onPressed: () async {
-                          _audio.play(AssetSource('mouse.mp3'));
+                          _audio.play(AssetSource('cute_button.mp3'));
                           if (_route.length < 1) {
                             return;
                           }
@@ -272,7 +272,7 @@ class RouteSpotView extends StatelessWidget {
   final _audiov = AudioPlayer();
   RouteSpotView({super.key, required RouteSpot spot}) : _spot = spot;
   void _popRouteSpot(BuildContext context) {
-    _audiov.play(AssetSource('mouse.mp3'));
+    _audiov.play(AssetSource('cute_button.mp3'));
     Navigator.pop(context, _spot);
   }
 
